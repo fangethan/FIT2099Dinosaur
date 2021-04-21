@@ -1,0 +1,51 @@
+Workbreakdown Agreement- Assignment 1
+
+
+Class diagram
+    Overall Class diagram
+    Members responisble - Ethan and Cleshan equally split (Work together for everything)
+    Due date- Wednesday(21/04/2021) 
+
+    Behavioural Class Diagram
+    Members responsible - Ethan 
+    Due date- Wednesday(21/04/2021)
+
+    Actor Class Diagram
+    Members resonsible- Cleshan
+    Due date- Wednesday(21/04/2021)
+    
+    AbleToEat Class Diagram
+    Members resonsible- Cleshan
+    Due date- Wednesday(21/04/2021)
+    
+
+
+Interaction Diagrams
+   Eating for food Diagram
+   Members responisble - Cleshan
+   Due date- Thursday(22/04/2021)
+
+   Growing bush Diagram
+   Members responisble - Cleshan
+   Due date- Thursday(22/04/2021)
+
+   Feeding Diagram
+   Members responisble - Ethan
+   Due date- Thursday(22/04/2021)
+
+   Attacking Diagram
+   Members responisble - Ethan
+   Due date- Thursday(22/04/2021)
+
+   Hunting Diagram
+   Members responisble - Ethan
+   Due date- Thursday(22/04/2021)
+
+   Breeding Diagram
+   Members responisble - Cleshan
+   Due date- Thursday(22/04/2021)
+   
+
+A design rationale
+Members Responisble - Ethan and Cleshan equally split (Work together for everything)
+Due date- Friday (23/04/2021)
