@@ -55,7 +55,7 @@ public class Application {
 		// Place a pair of stegosaurs in the middle of the map
 		gameMap.at(30, 12).addActor(new Stegosaur("Stegosaur"));
 		gameMap.at(32, 12).addActor(new Stegosaur("Stegosaur"));
-		gameMap.at(3,9).setGround(new VendingMachine());
+		gameMap.at(5,7).setGround(new VendingMachine());
 			
 		world.run();
 	}

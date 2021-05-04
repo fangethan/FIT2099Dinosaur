@@ -4,27 +4,26 @@ package game;
 import edu.monash.fit2099.engine.*;
 
 import java.lang.reflect.Constructor;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class VendingMachine extends Ground {
 
-    private int fruit;
-    private int vegetarianMealKit;
-    private int carnivoreMealKit;
-    private int stegosaurEgg;
-    private int brachiosaurEgg;
-    private int allosaurEgg;
-    private int laserGun;
+
+    HashMap<Item, Integer> ItemMap = new HashMap<Item, Integer>();
 
     public VendingMachine() {
         super('V');
-        this.fruit = 30;
-        this.vegetarianMealKit = 100;
-        this.carnivoreMealKit = 500;
-        this.stegosaurEgg = 200;
-        this.brachiosaurEgg = 500;
-        this.allosaurEgg = 1000;
-        this.laserGun = 500;
+        ItemMap.put(new Fruit(), 30);
+        ItemMap.put(new VegitarianMealKit(), 100);
+        ItemMap.put(new CarnivoreMealKit(), 500);
+        ItemMap.put(new StegosaurEgg(), 200);
+        ItemMap.put(new BrachiosaurEgg(), 500);
+        ItemMap.put(new AllosaurEgg(), 100);
+        ItemMap.put(new LaserGun(), 500);
+
+
     }
 
     @Override
@@ -34,17 +33,24 @@ public class VendingMachine extends Ground {
 
 
     public Actions allowableActions(Actor actor, Location location, String direction) {
+
         Actions buyActions = new Actions();
-        buyActions.add(new Buy("mealKit", 30));
 
         if (actor instanceof Player) {
-            //buyac
+            for (Map.Entry<Item, Integer> items : ItemMap.entrySet()) {
+                if (((Player) actor).getEcoPoints() >= items.getValue()) {
+                    buyActions.add(new Buy(items.getKey(), items.getValue()));
+                }
+
+
+            }
+
 
         }
-
-    return buyActions;
+        return buyActions;
     }
 }
+
 
 
 

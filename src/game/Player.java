@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.Menu;
  * Class representing the Player.
  */
 public class Player extends Actor {
-
+	private int ecoPoints;
 	private Menu menu = new Menu();
 
 	/**
@@ -23,6 +23,7 @@ public class Player extends Actor {
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
+		ecoPoints = 1000;
 	}
 
 	@Override
@@ -31,5 +32,12 @@ public class Player extends Actor {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 		return menu.showMenu(this, actions, display);
+	}
+
+	public int getEcoPoints() {
+		return this.ecoPoints;
+	}
+	public void deductEcoPoints(int points){
+		this.ecoPoints -= points;
 	}
 }
