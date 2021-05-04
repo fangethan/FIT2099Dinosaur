@@ -19,5 +19,8 @@ public class Tree extends Ground {
 			displayChar = 't';
 		if (age == 20)
 			displayChar = 'T';
+		Probability value = new Probability();
+		float randomNumber = value.getProbability();
+		//if (randomNumber<=)
 	}
 }
