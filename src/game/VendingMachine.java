@@ -31,7 +31,13 @@ public class VendingMachine extends Ground {
         return false;
     }
 
+    @Override
+    public boolean blocksThrownObjects() {
+        return true;
+    }
 
+
+    @Override
     public Actions allowableActions(Actor actor, Location location, String direction) {
 
         Actions buyActions = new Actions();
@@ -44,8 +50,6 @@ public class VendingMachine extends Ground {
 
 
             }
-
-
         }
         return buyActions;
     }

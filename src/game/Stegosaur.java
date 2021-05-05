@@ -1,12 +1,7 @@
 package game;
 
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.DoNothingAction;
-import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.*;
 
 /**
  * A herbivorous dinosaur.
@@ -15,9 +10,10 @@ import edu.monash.fit2099.engine.GameMap;
 public class Stegosaur extends Dinosaur {
 	// Will need to change this to a collection if Stegosaur gets additional Behaviours.
 	private Behaviour behaviour;
-	private int foodLevels = 50;
+	private int foodLevels = 2;
 	private int age;
 	private char gender;
+	private int tick = 0;
 
 	/** 
 	 * Constructor.
@@ -45,6 +41,8 @@ public class Stegosaur extends Dinosaur {
 		return new Actions(new AttackAction(this));
 	}
 
+
+
 	/**
 	 * Figure out what to do next.
 	 * 
@@ -53,13 +51,29 @@ public class Stegosaur extends Dinosaur {
 	 * 
 	 * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
 	 */
-	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		Action wander = behaviour.getAction(this, map);
-		if (wander != null)
-			return wander;
-		
-		return new DoNothingAction();
-	}
+		//Reduces food level each turn
 
+		/*if (wander != null)
+			return wander;
+
+		return new DoNothingAction();
+		*/
+		this.foodLevels -= 1;
+		System.out.println(this.foodLevels);
+		if (this.foodLevels <= 0) {
+			this.tick++;
+
+			if (this.tick == 20) {
+				Death deathAction = new Death();
+				this.tick =0;
+				return deathAction;
+
+
+			}
+
+		}
+		return wander;
+	}
 }

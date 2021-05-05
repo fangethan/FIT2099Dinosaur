@@ -2,10 +2,11 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
-public class Dinosaur extends Actor {
+public abstract class Dinosaur extends Actor {
     private char gender;
-    private int foodLevel;
+    private int foodLevels;
     private int age;
+    private int tick = 0;
 
     private Behaviour behaviour;
     private Behaviour wander = new WanderBehaviour();
@@ -15,7 +16,7 @@ public class Dinosaur extends Actor {
     }
 
     public int getFoodLevel() {
-        return foodLevel;
+        return foodLevels;
     }
 
     public int getAge() {
@@ -36,13 +37,13 @@ public class Dinosaur extends Actor {
 
     @Override
     public boolean isConscious() {
-        return foodLevel > 0 && hitPoints > 0;
+        return foodLevels > 0 && hitPoints > 0;
     }
 
     public void breedOption() {
-        if (hasCapability() && this.foodLevel > 50) {
+        /*if (hasCapability() && this.foodLevel > 50) {
             behaviour = new BreedBehaviour(this);
-        }
+        }*/
     }
 
     /**
@@ -58,6 +59,6 @@ public class Dinosaur extends Actor {
 
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-        return null;
+    return null;
     }
 }

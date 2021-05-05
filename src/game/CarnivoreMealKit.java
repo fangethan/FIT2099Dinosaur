@@ -7,6 +7,6 @@ public class CarnivoreMealKit extends MealKits{
         this.name = "CarnivoreMealKit";
     }
     public String getName(){
-        return this.name;
+        return "CarnivoreMealKit";
     }
 }

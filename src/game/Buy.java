@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
 
+import java.lang.reflect.Constructor;
+
 public class Buy extends Action {
     private Item item ;
     private int cost;
@@ -24,7 +26,10 @@ public class Buy extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-            return "Buy:" + this.item + ",Cost:" + this.cost;
+        Class<?> currentClass = this.item.getClass();
+
+            return "Buy:" + currentClass.getSimpleName() + ",Cost:" + this.cost;
+
         }
     }
 
