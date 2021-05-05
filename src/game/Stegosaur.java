@@ -12,9 +12,12 @@ import edu.monash.fit2099.engine.GameMap;
  * A herbivorous dinosaur.
  *
  */
-public class Stegosaur extends Actor {
+public class Stegosaur extends Dinosaur {
 	// Will need to change this to a collection if Stegosaur gets additional Behaviours.
 	private Behaviour behaviour;
+	private int foodLevels = 50;
+	private int age;
+	private char gender;
 
 	/** 
 	 * Constructor.
@@ -22,10 +25,19 @@ public class Stegosaur extends Actor {
 	 * 
 	 * @param name the name of this Stegosaur
 	 */
-	public Stegosaur(String name) {
-		super(name, 'd', 100);
-		
+//	public Stegosaur(String name, int foodLevels) {
+//		super(name, 'S', 50);
+//		behaviour = new WanderBehaviour();
+//		this.foodLevels = foodLevels;
+//	}
+
+	public Stegosaur(String name, int foodLevels, int age, char gender) {
+		super(name, 'S', 100);
 		behaviour = new WanderBehaviour();
+		this.foodLevels = foodLevels;
+		this.age = age;
+		this.gender = gender;
+
 	}
 
 	@Override
