@@ -2,21 +2,11 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BreedBehaviour extends FollowBehaviour{
-
-    private Enum<?> capability;
-    private WanderBehaviour wanderBehaviour;
-
-    /**
-     * Constructor.
-     *
-     * @param subject the Actor to follow
-     */
-    public BreedBehaviour(Actor subject) {
+public class HungerBehaviour extends FollowBehaviour{
+    public HungerBehaviour(Actor subject) {
         super(subject);
     }
 
@@ -66,9 +56,6 @@ public class BreedBehaviour extends FollowBehaviour{
         return map.getActorAt(minimalLocation);
     }
 
-    public boolean validActor(Actor actor) {
-        return actor != null && actor.hasCapability(capability);
-    }
 
 
     public Map<Actor, Location> getAllActors(GameMap gameMap) {
@@ -103,6 +90,4 @@ public class BreedBehaviour extends FollowBehaviour{
 
         return false;
     }
-
-
 }

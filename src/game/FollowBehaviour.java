@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.*;
  */
 public class FollowBehaviour implements Behaviour {
 
-	private Actor target;
+	public Actor target;
 
 	/**
 	 * Constructor.
