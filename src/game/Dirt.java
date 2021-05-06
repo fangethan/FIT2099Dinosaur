@@ -44,6 +44,7 @@ public class Dirt extends Ground {
 		if (!hasTree) {
 			if ((bushNeighbour >= 2&& randomNumber<=0.1) || (randomNumber<0.01)){
 				location.setGround(new Bush());
+
 			}
 		}
 
