@@ -7,7 +7,7 @@ public class Bush extends Ground implements Harvestable {
     public Bush(){
         super('*');
     }
-    @Override
+   /* @Override
     public void tick(Location location) {
         super.tick(location);
 
@@ -18,17 +18,17 @@ public class Bush extends Ground implements Harvestable {
         }
 
 
-    }
+    }*/
     @Override
     public String harvest(Actor actor, Location location) {
         // Add hay to inventory
 
         Probability value = new Probability();
         float randomNumber = value.getProbability();
-        if (randomNumber<=0.01){
+        if (randomNumber<=0.4){
             actor.addItemToInventory(new Fruit());
             location.removeItem(new Fruit());
-            return actor + "harvested Fruit";
+            return actor + " harvested Fruit";
         }
         else{
             return actor + "did not find fruit ";
