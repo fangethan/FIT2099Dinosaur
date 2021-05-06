@@ -51,10 +51,19 @@ public class Application {
 		
 		Actor player = new Player("Player", '@', 100);
 		world.addPlayer(player, gameMap.at(9, 4));
-		
+
+		Stegosaur male = new Stegosaur("Stegosaur",50,6,'M');
+		Stegosaur female = new Stegosaur("Stegosaur",2,6,'F');
+
 		// Place a pair of stegosaurs in the middle of the map
-		gameMap.at(30, 12).addActor(new Stegosaur("Stegosaur",2,6,'M'));
+		gameMap.at(30, 12).addActor(male);
+		gameMap.at(25, 12).addActor(female);
 		gameMap.at(32, 12).addActor(new Stegosaur("Stegosaur",2,6,'F'));
+
+		BreedBehaviour breedBehaviour = new BreedBehaviour(male);
+		breedBehaviour.getAllActors(gameMap);
+		breedBehaviour.getLocation(gameMap.at(30, 12),gameMap);
+//		breedBehaviour.adjacent(male,female,gameMap);
 
 		gameMap.at(5,7).setGround(new VendingMachine());
 			
