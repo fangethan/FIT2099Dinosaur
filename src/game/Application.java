@@ -61,8 +61,9 @@ public class Application {
 		gameMap.at(32, 12).addActor(new Stegosaur("Stegosaur",2,6,'F'));
 
 		BreedBehaviour breedBehaviour = new BreedBehaviour(male);
-		breedBehaviour.getAllActors(gameMap);
-		breedBehaviour.getLocation(gameMap.at(30, 12),gameMap);
+		breedBehaviour.getAction(male,gameMap);
+//		breedBehaviour.getAllActors(gameMap);
+//		breedBehaviour.getLocation(gameMap.at(30, 12),gameMap);
 //		breedBehaviour.adjacent(male,female,gameMap);
 
 		gameMap.at(5,7).setGround(new VendingMachine());
