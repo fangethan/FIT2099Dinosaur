@@ -60,6 +60,16 @@ public class Stegosaur extends Dinosaur {
 
 		return new DoNothingAction();
 		*/
+
+		Action nextAction;
+
+		if (!isConscious()) {
+			behaviour = new BreedBehaviour(this,Breeding.male);
+			nextAction = behaviour.getAction(this,map);
+			return nextAction;
+		}
+
+		// checks if animal is dead and tick thing where tick = 20, then it dies
 		this.foodLevels -= 1;
 		System.out.println(this.foodLevels);
 		if (this.foodLevels <= 0) {

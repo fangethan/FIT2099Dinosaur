@@ -56,14 +56,14 @@ public class Application {
 		Stegosaur male = new Stegosaur("Stegosaur",52,32,'M');
 		Stegosaur female = new Stegosaur("Stegosaur",52,32,'F');
 
-		gameMap.at(30, 12).addActor(male);
-		gameMap.at(36, 12).addActor(female);
+		gameMap.at(22, 12).addActor(male);
+		gameMap.at(60, 10).addActor(female);
 		gameMap.at(32, 12).addActor(new Stegosaur("Stegosaur",52,32,'F'));
 
 		gameMap.at(5,7).setGround(new VendingMachine());
 
-		BreedBehaviour breedBehaviour = new BreedBehaviour(male, Breeding.male);
-		breedBehaviour.getAction(male,gameMap);
+//		BreedBehaviour breedBehaviour = new BreedBehaviour(male, Breeding.male);
+//		breedBehaviour.getAction(male,gameMap);
 
 		world.run();
 	}

@@ -35,9 +35,10 @@ public class BreedBehaviour extends FollowBehaviour{
         // to check if target is not null and adjacent to the target
         if (target != null && adjacent(actor, target, map)) {
             // If both dinosaurs are both ready to mate
+            System.out.println("They're adjacent");
             System.out.println("Breed action is called");
 //            if () {
-//                nextAction = new BreedAction((Dinosaur) target);
+                nextAction = new BreedAction((Dinosaur) target);
 //            }
         } else {
             // the else if checks if it is not near its mate and still fertile so it can move closer towards it
@@ -130,7 +131,6 @@ public class BreedBehaviour extends FollowBehaviour{
 
         for (Exit exit: here.getExits()) {
             if (gameMap.getActorAt(exit.getDestination()) == mate2) {
-                System.out.println("They're adjacent");
                 return true;
             }
         }

@@ -37,7 +37,10 @@ public abstract class Dinosaur extends Actor {
 
     @Override
     public boolean isConscious() {
-        return foodLevels > 0 && hitPoints > 0;
+        if (foodLevels > 0 && hitPoints > 0) {
+            return true;
+        }
+        return false;
     }
 
     public void breedOption() {
@@ -62,12 +65,7 @@ public abstract class Dinosaur extends Actor {
         Location location = map.locationOf(this);
         int x = location.x();
         int y = location.y();
-        Action nextAction;
 
-        if (isConscious()) {
-            nextAction = behaviour.getAction(this,map);
-            return nextAction;
-        }
 
 
     return null;
