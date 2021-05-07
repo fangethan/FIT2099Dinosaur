@@ -10,9 +10,14 @@ import java.util.Map;
 
 public class VendingMachine extends Ground {
 
-
+    /**
+     * itemMap of whats in the vending machine
+     */
     HashMap<Item, Integer> ItemMap = new HashMap<Item, Integer>();
 
+    /**
+     * constructor of vending machine
+     */
     public VendingMachine() {
         super('V');
         ItemMap.put(new Fruit(), 30);
@@ -26,17 +31,32 @@ public class VendingMachine extends Ground {
 
     }
 
+    /**
+     * tells actor can't enter into a vending machine
+     * @param actor the Actor to check
+     * @return false
+     */
     @Override
     public boolean canActorEnter(Actor actor) {
         return false;
     }
 
+    /**
+     * locks thrown objects but not movement
+     * @return true
+     */
     @Override
     public boolean blocksThrownObjects() {
         return true;
     }
 
-
+    /**
+     * this is used to create new attack actions
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return
+     */
     @Override
     public Actions allowableActions(Actor actor, Location location, String direction) {
 

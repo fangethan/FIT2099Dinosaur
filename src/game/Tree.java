@@ -6,12 +6,22 @@ import java.util.Map;
 import java.util.Random;
 
 public class Tree extends Ground implements Harvestable {
+	/**
+	 * age of the tree
+	 */
 	private int age = 0;
 
+	/**
+	 * constructor of the tree
+	 */
 	public Tree() {
 		super('+');
 	}
 
+	/**
+	 * to see if the tree is fully grown or not as well as add fruits on it by probability
+	 * @param location The location of the Ground
+	 */
 	@Override
 	public void tick(Location location) {
 		super.tick(location);
@@ -32,7 +42,12 @@ public class Tree extends Ground implements Harvestable {
 		}
 	}
 
-
+	/**
+	 * To see if the tree can harvest or not
+	 * @param actor The actor that is doing the harvesting
+	 * @param location Location of the object being harvested.
+	 * @return
+	 */
 	@Override
 	public String harvest(Actor actor, Location location) {
 		// Add fruit to inventory randomly

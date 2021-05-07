@@ -10,7 +10,9 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 
 public class WanderBehaviour implements Behaviour {
-	
+	/**
+	 * variable random used so actors move around randomly
+	 */
 	private Random random = new Random();
 
 

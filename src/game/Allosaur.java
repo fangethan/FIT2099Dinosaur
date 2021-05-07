@@ -18,6 +18,7 @@ public class Allosaur extends Dinosaur {
         behaviour = new WanderBehaviour();
     }
 
+
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
         return new Actions(new AttackAction(this));

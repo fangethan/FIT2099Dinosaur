@@ -6,11 +6,17 @@ import edu.monash.fit2099.engine.*;
  * Class representing the Player.
  */
 public class Player extends Actor {
+	/**
+	 *  the ecoPoints of the player
+	 */
 	private int ecoPoints;
+	/**
+	 * the menu of the player
+	 */
 	private Menu menu = new Menu();
 
 	/**
-	 * Constructor.
+	 * Constructor for player
 	 *
 	 * @param name        Name to call the player in the UI
 	 * @param displayChar Character to represent the player in the UI
@@ -22,6 +28,14 @@ public class Player extends Actor {
 		ecoPoints = 1000;
 	}
 
+	/**
+	 * Each turn, the player will move
+	 * @param actions    collection of possible Actions for this Actor
+	 * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+	 * @param map        the map containing the Actor
+	 * @param display    the I/O object to which messages may be written
+	 * @return
+	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
@@ -37,13 +51,26 @@ public class Player extends Actor {
 		return menu.showMenu(this, actions, display);
 	}
 
+	/**
+	 * getEcoPoint retrieves the eco points of player
+	 * @return the eco points
+	 */
 	public int getEcoPoints() {
 		return this.ecoPoints;
 	}
 
+	/**
+	 * addPoints adds more points to the players eco points
+	 * @param points adds that amount of points towards its ecoPoints
+	 */
 	public void addPoints(int points) {
 		this.ecoPoints += points;
 	}
+
+	/**
+	 * deductEcoPoints deducts points off the players eco points
+	 * @param points deducts that amount of point towards its ecoPoints
+	 */
 	public void deductEcoPoints(int points){
 		this.ecoPoints -= points;
 	}

@@ -11,7 +11,7 @@ public class FollowBehaviour implements Behaviour {
 	public Actor target;
 
 	/**
-	 * Constructor.
+	 * Constructor
 	 * 
 	 * @param subject the Actor to follow
 	 */
@@ -19,6 +19,14 @@ public class FollowBehaviour implements Behaviour {
 		this.target = subject;
 	}
 
+	/**
+	 * getAction is used to get the next MoveAction that tells the
+	 * actor as well as moves the actor closer towards the target
+	 *
+	 * @param actor the Actor acting
+	 * @param map the GameMap containing the Actor
+	 * @return
+	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		if(!map.contains(target) || !map.contains(actor))
