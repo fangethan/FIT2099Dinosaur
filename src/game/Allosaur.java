@@ -2,7 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
-public class Allosaur extends Actor {
+public class Allosaur extends Dinosaur {
     // Will need to change this to a collection if Stegosaur gets additional Behaviours.
     private Behaviour behaviour;
 
@@ -12,8 +12,8 @@ public class Allosaur extends Actor {
      *
      * @param name the name of this allosaur
      */
-    public Allosaur(String name) {
-        super(name, 'A', 100);
+    public Allosaur(String name, char gender) {
+        super(name, 'A', 100, gender);
 
         behaviour = new WanderBehaviour();
     }
@@ -31,12 +31,12 @@ public class Allosaur extends Actor {
      *
      * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
      */
-    @Override
-    public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-        Action wander = behaviour.getAction(this, map);
-        if (wander != null)
-            return wander;
-
-        return new DoNothingAction();
-    }
+//    @Override
+//    public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+//        Action wander = behaviour.getAction(this, map);
+//        if (wander != null)
+//            return wander;
+//
+//        return new DoNothingAction();
+//    }
 }

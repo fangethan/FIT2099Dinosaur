@@ -3,9 +3,9 @@ package game;
 import edu.monash.fit2099.engine.*;
 
 public abstract class Dinosaur extends Actor {
-    private char gender;
-    private int foodLevels;
-    private int age;
+    public char gender;
+    public int foodLevels = 52;
+    public int age = 32;
     private int tick = 0;
 
     private Behaviour behaviour;
@@ -56,18 +56,55 @@ public abstract class Dinosaur extends Actor {
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      */
-    public Dinosaur(String name, char displayChar, int hitPoints) {
+    public Dinosaur(String name, char displayChar, int hitPoints, char gender) {
         super(name, displayChar, hitPoints);
+        this.behaviour = new WanderBehaviour();
+        this.gender = gender;
     }
 
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+        System.out.println("Food levels: " + foodLevels);
         Location location = map.locationOf(this);
         int x = location.x();
         int y = location.y();
 
+//        this.foodLevels -= 1;
+        //System.out.println(this.foodLevels);
+        Action wander = behaviour.getAction(this, map);
+        //Reduces food level each turn
+
+		/*if (wander != null)
+			return wander;
+
+		return new DoNothingAction();
+		*/
 
 
-    return null;
+        Action nextAction = null;
+
+        if (isConscious()) {
+            foodLevels--;
+            if (this.foodLevels > 50) {
+                behaviour = new BreedBehaviour(this, Breeding.male);
+                nextAction = behaviour.getAction(this, map);
+                return nextAction;
+            }
+
+        } else {
+            this.tick++;
+            if (this.tick == 20) {
+                Death deathAction = new Death();
+                nextAction = deathAction;
+                this.tick = 0;
+                return nextAction;
+            }
+
+        }
+        if (nextAction == null) {
+            return wander;
+        }
+        return new DoNothingAction();
+
     }
 }

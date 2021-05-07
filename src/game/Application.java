@@ -53,12 +53,25 @@ public class Application {
 		world.addPlayer(player, gameMap.at(9, 4));
 		
 		// Place a pair of stegosaurs in the middle of the map
-		Stegosaur male = new Stegosaur("Stegosaur",52,32,'M');
-		Stegosaur female = new Stegosaur("Stegosaur",52,32,'F');
+		Stegosaur male = new Stegosaur("Stegosaur",'M');
+		Stegosaur female = new Stegosaur("Stegosaur",'F');
+//
+		Brachiosaur brachiosaur1 = new Brachiosaur("Brachiosaur",'M');
+		Brachiosaur brachiosaur2 = new Brachiosaur("Brachiosaur",'F');
+		Brachiosaur brachiosaur3 = new Brachiosaur("Brachiosaur",'F');
 
-		gameMap.at(30, 12).addActor(male);
+		Allosaur allosaur1 = new Allosaur("Allosaur", 'M');
+		Allosaur allosaur2 = new Allosaur("Allosaur", 'F');
+		Allosaur allosaur3 = new Allosaur("Allosaur", 'F');
+
+		gameMap.at(25, 12).addActor(brachiosaur1);
+		gameMap.at(60, 12).addActor(brachiosaur2);
+		gameMap.at(32, 12).addActor(brachiosaur3);
+
+		gameMap.at(25, 20).addActor(male);
 		gameMap.at(60, 10).addActor(female);
-		gameMap.at(32, 12).addActor(new Stegosaur("Stegosaur",52,32,'F'));
+		gameMap.at(32, 20).addActor(new Stegosaur("Stegosaur",'F'));
+
 
 		gameMap.at(5,7).setGround(new VendingMachine());
 

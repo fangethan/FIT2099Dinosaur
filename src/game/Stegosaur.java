@@ -9,10 +9,6 @@ import edu.monash.fit2099.engine.*;
  */
 public class Stegosaur extends Dinosaur {
 	// Will need to change this to a collection if Stegosaur gets additional Behaviours.
-	private Behaviour behaviour;
-	private int foodLevels = 2;
-	private int age;
-	private char gender;
 	private int tick = 0;
 
 	/**
@@ -26,13 +22,9 @@ public class Stegosaur extends Dinosaur {
 //		behaviour = new WanderBehaviour();
 //		this.foodLevels = foodLevels;
 //	}
-	public Stegosaur(String name, int foodLevels, int age, char gender) {
-		super(name, 'S', 100);
-		behaviour = new WanderBehaviour();
-		this.foodLevels = foodLevels;
-		this.age = age;
-		this.gender = gender;
 
+	public Stegosaur(String name, char gender) {
+		super(name, 'S', 100, gender);
 	}
 
 	@Override
@@ -49,43 +41,8 @@ public class Stegosaur extends Dinosaur {
 	 *
 	 * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
 	 */
-	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		this.foodLevels -= 1;
-		//System.out.println(this.foodLevels);
-		Action wander = behaviour.getAction(this, map);
-		//Reduces food level each turn
-
-		/*if (wander != null)
-			return wander;
-
-		return new DoNothingAction();
-		*/
-
-
-		Action nextAction = null;
-
-		if (isConscious()) {
-			System.out.println(this.foodLevels );
-			if (this.foodLevels > 50) {
-				behaviour = new BreedBehaviour(this, Breeding.male);
-				nextAction = behaviour.getAction(this, map);
-				return nextAction;
-			}
-
-		} else {
-			this.tick++;
-			if (this.tick == 20) {
-				Death deathAction = new Death();
-				nextAction = deathAction;
-				this.tick = 0;
-				return nextAction;
-			}
-
-		}
-		if (nextAction == null) {
-			return wander;
-		}
-		return new DoNothingAction();
-
-	}
+//	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+//		return null;
+//
+//	}
 }

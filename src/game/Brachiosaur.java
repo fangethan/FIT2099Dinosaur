@@ -2,7 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
-public class Brachiosaur extends Actor {
+public class Brachiosaur extends Dinosaur {
     // Will need to change this to a collection if Stegosaur gets additional Behaviours.
     private Behaviour behaviour;
 
@@ -12,8 +12,8 @@ public class Brachiosaur extends Actor {
      *
      * @param name the name of this brachiosaur
      */
-    public Brachiosaur(String name) {
-        super(name, 'B', 100);
+    public Brachiosaur(String name, char gender) {
+        super(name, 'B', 100, gender);
 
         behaviour = new WanderBehaviour();
     }
@@ -31,12 +31,12 @@ public class Brachiosaur extends Actor {
      *
      * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
      */
-    @Override
-    public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-        Action wander = behaviour.getAction(this, map);
-        if (wander != null)
-            return wander;
-
-        return new DoNothingAction();
-    }
+//    @Override
+//    public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+//        Action wander = behaviour.getAction(this, map);
+//        if (wander != null)
+//            return wander;
+//
+//        return new DoNothingAction();
+//    }
 }

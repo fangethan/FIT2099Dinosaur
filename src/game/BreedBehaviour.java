@@ -35,8 +35,6 @@ public class BreedBehaviour extends FollowBehaviour{
         // to check if target is not null and adjacent to the target
         if (target != null && adjacent(actor, target, map)) {
             // If both dinosaurs are both ready to mate
-            System.out.println("They're adjacent");
-            System.out.println("Breed action is called");
 //            if () {
                 nextAction = new BreedAction((Dinosaur) target);
 //            }
@@ -45,11 +43,8 @@ public class BreedBehaviour extends FollowBehaviour{
             nextAction = super.getAction(actor, map);
         }
 
-//        if (nextAction != null) {
             return nextAction;
-//        }
 
-//        return wanderBehaviour.getAction(actor, map);
     }
 
     public Actor getLocation(Location currentLocation, GameMap map) {
@@ -63,7 +58,6 @@ public class BreedBehaviour extends FollowBehaviour{
             int y = spot.getValue().y();
             Location there = map.at(x,y);
             if (actor instanceof Dinosaur) {
-                System.out.println("actor is dinosaur");
 //                if (validActor(actor)) {
 //                    System.out.println("Valid dino");
 //
@@ -117,12 +111,9 @@ public class BreedBehaviour extends FollowBehaviour{
                 Actor actor = gameMap.getActorAt(location);
                 if (location.containsAnActor()) {
                     dinosaursList.put(actor,location);
-                    count++;
-                    text += actor.getDisplayChar();
                 }
             }
         }
-        System.out.println("Dinosaur list" + count + text);
         return dinosaursList;
     }
 
