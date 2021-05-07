@@ -1,0 +1,30 @@
+Modifications 
+
+Buy Action/ Vending Machine
+The Buy action was not initiated by the player like the old sequence design. Instead it was called by the vending 
+machine which checks to see if there is an instance of an actor nearby it and it then calls a buy action to initiate 
+the player buying which item he wants. This was done to make the design more easier to understand as conceptually the 
+vending machine allows players to buy items and such calls the buy class.
+
+Added Probability class
+This class creates a random variable between 0 to 1. This is used for the probability of new fruit growing as well as 
+players harvesting food. THis was done as this can be used for multiple classes such as the bush class and tree class.
+
+Added MealKit Class
+This was used as a parent class for the vegetarian meal kit and the carnivore meal kit. This allowed both these to
+ inherit the attributes of the parent class.
+ 
+Added Egg Class
+This was used as a parent class for the three types of eggs. This was essential as it allowed for inheritance 
+of methods as well following the design principles.
+
+BreedAction
+The breed action now also contains a method called capability. This method is used to check the hasCapability 
+of the actors and remove its attributes of either eligibleMale or eligibleFemale or add its attributes to pregnantFemale
+
+BreedBehaviour, HuntBehaviour 
+The breed behaviour and HuntBehaviour class although followed the design at the beginning by first getting all
+ the x and y range to get all the actors, it then changes by needing a method called containsAnActor to see if 
+the location at point (x,y) is an actor which can then be put in a list called dinosaurList. The class still gets
+ the minimum distance but however does not use a while loop to get the dinosaurs to move together. Instead it does 
+this in the super class of follow behaviour but it still checks if the target dinosaur is adjacent towards the moving dinosaur. 

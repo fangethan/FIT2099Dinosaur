@@ -109,7 +109,8 @@ public class BreedBehaviour extends FollowBehaviour{
     }
     /**
      * This checks if the 2 dinosaours are the same species
-     * @param actor
+     * @param mate1 1 is the first dinosaur
+     * @param mate2 2 is the second dinosaur
      * @return true or false
      */
     public boolean sameSpecies(Dinosaur mate1, Dinosaur mate2) {
