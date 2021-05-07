@@ -15,10 +15,10 @@ public class Stegosaur extends Dinosaur {
 	private char gender;
 	private int tick = 0;
 
-	/** 
+	/**
 	 * Constructor.
 	 * All Stegosaurs are represented by a 'd' and have 100 hit points.
-	 * 
+	 *
 	 * @param name the name of this Stegosaur
 	 */
 //	public Stegosaur(String name, int foodLevels) {
@@ -26,7 +26,6 @@ public class Stegosaur extends Dinosaur {
 //		behaviour = new WanderBehaviour();
 //		this.foodLevels = foodLevels;
 //	}
-
 	public Stegosaur(String name, int foodLevels, int age, char gender) {
 		super(name, 'S', 100);
 		behaviour = new WanderBehaviour();
@@ -42,16 +41,17 @@ public class Stegosaur extends Dinosaur {
 	}
 
 
-
 	/**
 	 * Figure out what to do next.
-	 * 
+	 * <p>
 	 * FIXME: Stegosaur wanders around at random, or if no suitable MoveActions are available, it
 	 * just stands there.  That's boring.
-	 * 
+	 *
 	 * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
 	 */
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		this.foodLevels -= 1;
+		//System.out.println(this.foodLevels);
 		Action wander = behaviour.getAction(this, map);
 		//Reduces food level each turn
 
@@ -64,24 +64,23 @@ public class Stegosaur extends Dinosaur {
 		Action nextAction;
 
 		if (!isConscious()) {
-			behaviour = new BreedBehaviour(this,Breeding.male);
-			nextAction = behaviour.getAction(this,map);
-			return nextAction;
-		}
+			System.out.println(this.foodLevels );
+			if (this.foodLevels > 50) {
+				behaviour = new BreedBehaviour(this, Breeding.male);
+				nextAction = behaviour.getAction(this, map);
+				return nextAction;
+			}
 
-		// checks if animal is dead and tick thing where tick = 20, then it dies
-		this.foodLevels -= 1;
-		System.out.println(this.foodLevels);
-		if (this.foodLevels <= 0) {
+		} else {
 			this.tick++;
-
 			if (this.tick == 20) {
 				Death deathAction = new Death();
-				this.tick =0;
+				this.tick = 0;
 				return deathAction;
-
-
 			}
+
+			// checks if animal is dead and tick thing where tick = 20, then it dies
+
 
 		}
 		return wander;

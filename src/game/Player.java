@@ -18,6 +18,7 @@ public class Player extends Actor {
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
+		EcoPoints.setPlayer(this);
 		ecoPoints = 1000;
 	}
 
@@ -38,6 +39,10 @@ public class Player extends Actor {
 
 	public int getEcoPoints() {
 		return this.ecoPoints;
+	}
+
+	public void addPoints(int points) {
+		this.ecoPoints += points;
 	}
 	public void deductEcoPoints(int points){
 		this.ecoPoints -= points;

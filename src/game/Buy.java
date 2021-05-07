@@ -11,7 +11,6 @@ public class Buy extends Action {
     private Item item ;
     private int cost;
     public Buy(Item item, int cost) {
-        assert cost >= 0;
 
         this.item = item;
         this.cost = cost;

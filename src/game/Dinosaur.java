@@ -37,7 +37,7 @@ public abstract class Dinosaur extends Actor {
 
     @Override
     public boolean isConscious() {
-        if (foodLevels > 0 && hitPoints > 0) {
+        if (foodLevels > 0 || hitPoints > 0) {
             return true;
         }
         return false;

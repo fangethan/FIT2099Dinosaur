@@ -25,6 +25,9 @@ public class Tree extends Ground implements Harvestable {
 		float randomNumber = value.getProbability();
 		if (randomNumber <= 0.05) {
 			location.addItem(new Fruit());
+			EcoPoints.addPoints(1);
+
+
 
 		}
 	}
