@@ -8,7 +8,9 @@ import java.util.Map;
 
 public class BreedBehaviour extends FollowBehaviour{
 
+    // <?> syntax is java's way to specifying that the generic type is "unbounded" - ie it can be "anything".
     private Enum<?> capability;
+    private Breeding breeding;
     private WanderBehaviour wanderBehaviour;
 
     /**
@@ -16,8 +18,10 @@ public class BreedBehaviour extends FollowBehaviour{
      *
      * @param subject the Actor to follow
      */
-    public BreedBehaviour(Actor subject) {
+    public BreedBehaviour(Actor subject, Enum<?> capable) {
         super(subject);
+        this.capability = capable;
+        this.wanderBehaviour = new WanderBehaviour();
     }
 
 
@@ -25,15 +29,26 @@ public class BreedBehaviour extends FollowBehaviour{
     public Action getAction(Actor actor, GameMap map) {
         Location currentLocation = map.locationOf(actor);
 
-        Actor destination = getLocation(currentLocation, map);
+        target = getLocation(currentLocation, map);
 
-//        int movingDistance = super.distance(currentLocation,map.locationOf(destination));
-
-        while (adjacent(actor,destination,map) == false) {
-            return super.getAction(actor, map);
+        Action nextAction = null;
+        // to check if target is not null and adjacent to the target
+        if (target != null && adjacent(actor, target, map)) {
+            // If both dinosaurs are both ready to mate
+            System.out.println("Breed action is called");
+//            if () {
+//                nextAction = new BreedAction((Dinosaur) target);
+//            }
+        } else {
+            // the else if checks if it is not near its mate and still fertile so it can move closer towards it
+            nextAction = super.getAction(actor, map);
         }
 
-        return super.getAction(actor, map);
+//        if (nextAction != null) {
+            return nextAction;
+//        }
+
+//        return wanderBehaviour.getAction(actor, map);
     }
 
     public Actor getLocation(Location currentLocation, GameMap map) {
@@ -50,13 +65,16 @@ public class BreedBehaviour extends FollowBehaviour{
                 System.out.println("actor is dinosaur");
 //                if (validActor(actor)) {
 //                    System.out.println("Valid dino");
+//
 //                }
-                if (minimalLocation == null) {
-                    minimalLocation = there;
-                } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
-                    minimalLocation = there;
-                    int minimumDistance = super.distance(currentLocation,there);
-                    System.out.println("Min location is: " + minimumDistance);
+                if (currentLocation != there) {
+                    if (minimalLocation == null) {
+                        minimalLocation = there;
+                    } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
+                        minimalLocation = there;
+                        int minimumDistance = super.distance(currentLocation,there);
+                        System.out.println("Min location is: " + minimumDistance);
+                    }
                 }
             }
         }
@@ -67,8 +85,24 @@ public class BreedBehaviour extends FollowBehaviour{
     }
 
     public boolean validActor(Actor actor) {
+
         return actor != null && actor.hasCapability(capability);
     }
+
+    public boolean sameSpecies(Dinosaur mate1, Dinosaur mate2) {
+        if (mate1.getGender() == mate2.getGender()) {
+            return true;
+        }
+        return false;
+    }
+
+//    public boolean checkEligibility(Dinosaur dinosaur) {
+//        if(!dinosaur.hasCapability(Breeding.baby) && dinosaur.getFoodLevel() > 50) {
+//            dinosaur.addCapability(breeding.findMate());
+//        }
+//        return false;
+//    }
+
 
 
     public Map<Actor, Location> getAllActors(GameMap gameMap) {

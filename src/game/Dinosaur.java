@@ -59,6 +59,17 @@ public abstract class Dinosaur extends Actor {
 
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+        Location location = map.locationOf(this);
+        int x = location.x();
+        int y = location.y();
+        Action nextAction;
+
+        if (isConscious()) {
+            nextAction = behaviour.getAction(this,map);
+            return nextAction;
+        }
+
+
     return null;
     }
 }

@@ -15,12 +15,10 @@ public class HuntBehaviour extends FollowBehaviour{
     public Action getAction(Actor actor, GameMap map) {
         Location currentLocation = map.locationOf(actor);
 
-        Actor destination = getLocation(currentLocation, map);
+        target = getLocation(currentLocation, map);
 
-//        int movingDistance = super.distance(currentLocation,map.locationOf(destination));
-
-        while (adjacent(actor,destination,map) == false) {
-            return super.getAction(actor, map);
+        if (target != null && adjacent(actor, target, map)) {
+            return new AttackAction(target);
         }
 
         return super.getAction(actor, map);
@@ -78,9 +76,9 @@ public class HuntBehaviour extends FollowBehaviour{
     }
 
     public boolean adjacent(Actor mate1, Actor mate2, GameMap gameMap) {
-        Location here = gameMap.locationOf(mate1);
+        Location currentLocation = gameMap.locationOf(mate1);
 
-        for (Exit exit: here.getExits()) {
+        for (Exit exit: currentLocation.getExits()) {
             if (gameMap.getActorAt(exit.getDestination()) == mate2) {
                 System.out.println("They're adjacent");
                 return true;

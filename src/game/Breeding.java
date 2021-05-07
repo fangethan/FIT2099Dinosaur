@@ -6,23 +6,25 @@ public enum Breeding {
     male,
     female,
     // male looking for a mate
-    fertileMale,
+    eligibleMale,
     // female looking for a mate
-    fertileFemale,
+    eligibleFemale,
     pregnantFemale,
     baby;
 
     // This should be stored as a capability to allow other dinosaurs to search this one out as a mate.
     public Breeding findMate() {
         if (this == male) {
-            return fertileFemale;
+            return eligibleFemale;
         } else {
-            return fertileMale;
+            return eligibleMale;
         }
     }
 
+
+
     //
-    public boolean isPregnant(Capable capable) {
-        return capable.hasCapability(fertileFemale) || capable.hasCapability(fertileMale);
+    public static boolean canMate(Capable capable) {
+        return capable.hasCapability(eligibleFemale) || capable.hasCapability(eligibleMale);
     }
 }

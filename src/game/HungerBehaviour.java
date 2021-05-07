@@ -19,7 +19,8 @@ public class HungerBehaviour extends FollowBehaviour{
 
 //        int movingDistance = super.distance(currentLocation,map.locationOf(destination));
 
-        while (adjacent(actor,destination,map) == false) {
+        while (target != null && adjacent(actor,destination,map) == false) {
+
             return super.getAction(actor, map);
         }
 
