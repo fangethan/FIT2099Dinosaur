@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class initates 2 dinasours moving together to breed
+ *
+ */
 public class BreedBehaviour extends FollowBehaviour{
 
     // <?> syntax is java's way to specifying that the generic type is "unbounded" - ie it can be "anything".
@@ -14,9 +18,10 @@ public class BreedBehaviour extends FollowBehaviour{
     private WanderBehaviour wanderBehaviour;
 
     /**
-     * Constructor.
+     * This is the Constructor.
      *
      * @param subject the Actor to follow
+     * @param capable Checks capablity of dinasour
      */
     public BreedBehaviour(Actor subject, Enum<?> capable) {
         super(subject);
@@ -24,7 +29,14 @@ public class BreedBehaviour extends FollowBehaviour{
         this.wanderBehaviour = new WanderBehaviour();
     }
 
-
+    /**
+     * This checks the location and see if it is next to each other
+     * If they are adjacent then a breedaction is called
+     * If not then it keeps moving towards
+     * @param actor
+     * @param map
+     * @return
+     */
     @Override
     public Action getAction(Actor actor, GameMap map) {
         Location currentLocation = map.locationOf(actor);
@@ -47,6 +59,13 @@ public class BreedBehaviour extends FollowBehaviour{
 
     }
 
+    /**
+     * This gets the minimum disatance to an eligble dinasour
+     *
+     * @param currentLocation this is the current location of the dinasour
+     * @param map this is the gamemap
+     * @return actor at location
+     */
     public Actor getLocation(Location currentLocation, GameMap map) {
         Map<Actor, Location> dinosaursList = new HashMap<>();
         dinosaursList = getAllActors(map);
@@ -68,7 +87,7 @@ public class BreedBehaviour extends FollowBehaviour{
                     } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
                         minimalLocation = there;
                         int minimumDistance = super.distance(currentLocation,there);
-                        System.out.println("Min location is: " + minimumDistance);
+
                     }
                 }
             }
@@ -79,11 +98,20 @@ public class BreedBehaviour extends FollowBehaviour{
         return map.getActorAt(minimalLocation);
     }
 
+    /**
+     * This checks if the actor has certain capablities
+     * @param actor
+     * @return true or false
+     */
     public boolean validActor(Actor actor) {
 
         return actor != null && actor.hasCapability(capability);
     }
-
+    /**
+     * This checks if the 2 dinosaours are the same species
+     * @param actor
+     * @return true or false
+     */
     public boolean sameSpecies(Dinosaur mate1, Dinosaur mate2) {
         if (mate1.getGender() == mate2.getGender()) {
             return true;
@@ -99,7 +127,11 @@ public class BreedBehaviour extends FollowBehaviour{
 //    }
 
 
-
+    /**
+     * This gets all the dinsours on the map
+     * @param gameMap is the map
+     * @return list of all the dinosaurs
+     */
     public Map<Actor, Location> getAllActors(GameMap gameMap) {
 
         Map<Actor, Location> dinosaursList = new HashMap<>();
@@ -117,6 +149,13 @@ public class BreedBehaviour extends FollowBehaviour{
         return dinosaursList;
     }
 
+    /**
+     * THis checks if 2 dinsours are adjacent to each other
+     * @param mate1 is the first dinosaur
+     * @param mate2 is the second dinosaur
+     * @param gameMap is the mao
+     * @return true or false
+     */
     public boolean adjacent(Actor mate1, Actor mate2, GameMap gameMap) {
         Location here = gameMap.locationOf(mate1);
 

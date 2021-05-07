@@ -55,14 +55,17 @@ public class Application {
 		// Place a pair of stegosaurs in the middle of the map
 		Stegosaur male = new Stegosaur("Stegosaur",'M');
 		Stegosaur female = new Stegosaur("Stegosaur",'F');
-//
+
+		//Places 3 brachisaurs on the map
 		Brachiosaur brachiosaur1 = new Brachiosaur("Brachiosaur",'M');
 		Brachiosaur brachiosaur2 = new Brachiosaur("Brachiosaur",'F');
 		Brachiosaur brachiosaur3 = new Brachiosaur("Brachiosaur",'F');
 
+		//Places 3 allosaurs on the mpa
 		Allosaur allosaur1 = new Allosaur("Allosaur", 'M');
 		Allosaur allosaur2 = new Allosaur("Allosaur", 'F');
 		Allosaur allosaur3 = new Allosaur("Allosaur", 'F');
+
 
 		gameMap.at(25, 12).addActor(brachiosaur1);
 		gameMap.at(60, 12).addActor(brachiosaur2);
