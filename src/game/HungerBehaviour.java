@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HungerBehaviour extends FollowBehaviour{
+
     public HungerBehaviour(Actor subject) {
         super(subject);
     }
@@ -28,11 +29,11 @@ public class HungerBehaviour extends FollowBehaviour{
     }
 
     public Actor getLocation(Location currentLocation, GameMap map) {
-        Map<Actor, Location> dinosaursList = new HashMap<>();
-        dinosaursList = getAllActors(map);
+        Map<Fruit, Location> herbivoreList = new HashMap<>();
+        herbivoreList = getALLFruits(map);
         Location minimalLocation = null;
 
-        for (Map.Entry<Actor, Location> spot: dinosaursList.entrySet()) {
+        for (Map.Entry<Fruit, Location> spot: herbivoreList.entrySet()) {
             Actor actor = spot.getValue().getActor();
             int x = spot.getValue().x();
             int y = spot.getValue().y();
@@ -59,25 +60,33 @@ public class HungerBehaviour extends FollowBehaviour{
 
 
 
-    public Map<Actor, Location> getAllActors(GameMap gameMap) {
+    public Map<Fruit, Location> getALLFruits(GameMap gameMap) {
 
-        Map<Actor, Location> dinosaursList = new HashMap<>();
+        Map<Fruit, Location> herbivoreList = new HashMap<>();
         int count = 0;
         String text = "";
         for (int x: gameMap.getXRange()) {
             for (int y: gameMap.getYRange()) {
                 Location location = gameMap.at(x,y);
-                Actor actor = gameMap.getActorAt(location);
-                if (location.containsAnActor()) {
-                    dinosaursList.put(actor,location);
-                    count++;
-                    text += actor.getDisplayChar();
-                }
+//                if (location.getGround() == ) {
+////                    herbivoreList.put(actor,location);
+////                    count++;
+////                    text += actor.getDisplayChar();
+//                }
             }
         }
-        System.out.println("Dinosaur list" + count + text);
-        return dinosaursList;
+        System.out.println("Fruit list" + count + text);
+        return herbivoreList;
     }
+
+//    public boolean groundHasFruit(Location location) {
+//        Ground ground = location.getGround();
+//
+//        if () {
+//
+//        }
+//
+//    }
 
     public boolean adjacent(Actor mate1, Actor mate2, GameMap gameMap) {
         Location here = gameMap.locationOf(mate1);
