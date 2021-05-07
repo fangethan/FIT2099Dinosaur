@@ -3,12 +3,26 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
 
+/**
+ * This is a bush which is a ground type
+ * this is also harvestable
+ */
 public class Bush extends Ground implements Harvestable {
-
+    /**
+     * This is the constructor
+     * The display char is *
+     */
     public Bush(){
         super('*');
     }
 
+    /**
+     * This is the harvest acton which adds item the fruit to inventory
+     *
+     * @param actor is the player
+     * @param location is the location
+     * @return string actor harvested fruit
+     */
     @Override
     public String harvest(Actor actor, Location location) {
         // Add hay to inventory
