@@ -61,19 +61,19 @@ public class Application {
 		Brachiosaur brachiosaur2 = new Brachiosaur("Brachiosaur",'F');
 		Brachiosaur brachiosaur3 = new Brachiosaur("Brachiosaur",'F');
 
-		//Places 3 allosaurs on the mpa
+		//Places 3 allosaurs on the map
 		Allosaur allosaur1 = new Allosaur("Allosaur", 'M');
 		Allosaur allosaur2 = new Allosaur("Allosaur", 'F');
 		Allosaur allosaur3 = new Allosaur("Allosaur", 'F');
 
 
-		gameMap.at(25, 12).addActor(brachiosaur1);
-		gameMap.at(60, 12).addActor(brachiosaur2);
-		gameMap.at(32, 12).addActor(brachiosaur3);
+//		gameMap.at(25, 12).addActor(brachiosaur1);
+//		gameMap.at(60, 12).addActor(brachiosaur2);
+//		gameMap.at(32, 12).addActor(brachiosaur3);
 
 		gameMap.at(25, 20).addActor(male);
 		gameMap.at(60, 10).addActor(female);
-		gameMap.at(32, 20).addActor(new Stegosaur("Stegosaur",'F'));
+		gameMap.at(27, 20).addActor(new Stegosaur("Stegosaur",'M'));
 
 
 		gameMap.at(5,7).setGround(new VendingMachine());

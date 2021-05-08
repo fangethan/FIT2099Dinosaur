@@ -44,17 +44,17 @@ public class BreedBehaviour extends FollowBehaviour{
         target = getLocation(currentLocation, map);
 
         Action nextAction = null;
-        // to check if target is not null and adjacent to the target
-        if (target != null && adjacent(actor, target, map)) {
-            // If both dinosaurs are both ready to mate
-//            if () {
+        if (sameSpecies((Dinosaur) target, (Dinosaur) actor) == true && oppositeGenders((Dinosaur) target, (Dinosaur) actor) == true) {
+            // to check if target is not null and adjacent to the target
+            if (target != null && adjacent(actor, target, map)) {
+                // If both dinosaurs are both ready to mate
                 nextAction = new BreedAction((Dinosaur) target);
-//            }
-        } else {
-            // the else if checks if it is not near its mate and still fertile so it can move closer towards it
-            nextAction = super.getAction(actor, map);
+                nextAction.execute(actor,map);
+            } else {
+                // the else if checks if it is not near its mate and still fertile so it can move closer towards it
+                nextAction = super.getAction(actor, map);
+            }
         }
-
             return nextAction;
 
     }
@@ -79,21 +79,16 @@ public class BreedBehaviour extends FollowBehaviour{
             if (actor instanceof Dinosaur) {
 //                if (validActor(actor)) {
 //                    System.out.println("Valid dino");
-//
 //                }
                 if (currentLocation != there) {
                     if (minimalLocation == null) {
                         minimalLocation = there;
                     } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
                         minimalLocation = there;
-                        int minimumDistance = super.distance(currentLocation,there);
-
                     }
                 }
             }
         }
-
-
 
         return map.getActorAt(minimalLocation);
     }
@@ -104,7 +99,6 @@ public class BreedBehaviour extends FollowBehaviour{
      * @return true or false
      */
     public boolean validActor(Actor actor) {
-
         return actor != null && actor.hasCapability(capability);
     }
     /**
@@ -114,18 +108,18 @@ public class BreedBehaviour extends FollowBehaviour{
      * @return true or false
      */
     public boolean sameSpecies(Dinosaur mate1, Dinosaur mate2) {
-        if (mate1.getGender() == mate2.getGender()) {
+        if (mate1.getDisplayChar() == mate2.getDisplayChar()) {
             return true;
         }
         return false;
     }
 
-//    public boolean checkEligibility(Dinosaur dinosaur) {
-//        if(!dinosaur.hasCapability(Breeding.baby) && dinosaur.getFoodLevel() > 50) {
-//            dinosaur.addCapability(breeding.findMate());
-//        }
-//        return false;
-//    }
+    public boolean oppositeGenders(Dinosaur mate1, Dinosaur mate2) {
+        if (mate1.getGender() != mate2.getGender()) {
+            return true;
+        }
+        return false;
+    }
 
 
     /**

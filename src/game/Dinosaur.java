@@ -9,12 +9,13 @@ import edu.monash.fit2099.engine.*;
  */
 public abstract class Dinosaur extends Actor {
     public char gender;
-    public int foodLevels = 52;
+    public int foodLevels = 55;
     public int age = 32;
     private int tick = 0;
+    private int pregnant = 0;
 
     private Behaviour behaviour;
-    private Behaviour wander = new WanderBehaviour();
+    private Behaviour wanderBehaviour = new WanderBehaviour();
     /**
      * Constructor.
      *
@@ -97,36 +98,64 @@ public abstract class Dinosaur extends Actor {
         int x = location.x();
         int y = location.y();
 
-
-        Action wander = behaviour.getAction(this, map);
-
         Action nextAction = null;
 
         if (isConscious()) {
             //Reduces food level each turn
             foodLevels--;
-            //This is to check if breeding is elibible
-            if (this.foodLevels > 50) {
-                behaviour = new BreedBehaviour(this, Breeding.male);
-                nextAction = behaviour.getAction(this, map);
-                return nextAction;
+
+            if (hasCapability(Breeding.pregnantFemale)) {
+                if (pregnant > 10) {
+                    pregnant = 0;
+                    removeCapability(Breeding.pregnantFemale);
+                    map.locationOf(this).addItem(this.produceEgg());
+                    nextAction = wanderBehaviour.getAction(this,map);
+                } else {
+                    pregnant++;
+                }
+
             }
+
+            //This is to check if breeding is eligible
+            if (this.foodLevels > 50) {
+                if (this.gender == 'M') {
+                    behaviour = new BreedBehaviour(this, Breeding.male);
+                } else {
+                    behaviour = new BreedBehaviour(this, Breeding.female);
+
+                }
+                nextAction = behaviour.getAction(this, map);
+            }
+            if (nextAction == null) {
+                return wanderBehaviour.getAction(this,map);
+            }
+             return nextAction;
 
         } else {
             this.tick++;
-            //This is to check if dinsour is dead
+            //This is to check if dinosaur is dead
             if (this.tick == 20) {
                 Death deathAction = new Death();
                 nextAction = deathAction;
                 this.tick = 0;
                 return nextAction;
+
             }
 
         }
-        if (nextAction == null) {
-            return wander;
-        }
+
         return new DoNothingAction();
 
     }
+    /**
+     * Egg created by Dinosaurs after breeding
+     * @return egg with a baby dinosaur
+     */
+    public Eggs produceEgg() {
+        Eggs egg = new Eggs();
+        return egg;
+    }
 }
+
+
+

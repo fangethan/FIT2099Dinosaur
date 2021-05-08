@@ -22,26 +22,20 @@ public class BreedAction extends Action {
     }
 
     /**
-     * This will execute and create eggs
+     * This will execute and declare which species has mated
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        String egg = actor.toString();
-        if (egg.equals("Stegosaur")) {
-            location = map.locationOf(actor);
-            location.addItem(new StegosaurEgg());
+        String species = actor.toString();
+        if (species.equals("Stegosaur")) {
             capability(actor);
-            return "Stegosaur egg has been laid";
-        } else if (egg.equals("Brachiosaur")) {
-            location = map.locationOf(actor);
-            location.addItem(new BrachiosaurEgg());
+            return "Stegosaur has mated";
+        } else if (species.equals("Brachiosaur")) {
             capability(actor);
-            return "Brachiosaur egg has been laid";
+            return "Brachiosaur has mated";
         } else {
-            location = map.locationOf(actor);
-            location.addItem(new AllosaurEgg());
             capability(actor);
-            return "Allosaur egg has been laid";
+            return "Allosaur has mated";
         }
 
     }
@@ -52,12 +46,12 @@ public class BreedAction extends Action {
      * @param actor This is the dinsour
      */
     public void capability(Actor actor) {
-        if (actor.hasCapability(Breeding.eligibleMale)) {
+        if (actor.hasCapability(Breeding.male)) {
             actor.removeCapability(Breeding.eligibleMale);
             dinosaurMate.removeCapability(Breeding.eligibleFemale);
             dinosaurMate.addCapability(Breeding.pregnantFemale);
         } else {
-            dinosaurMate.removeCapability(Breeding.eligibleMale);
+            dinosaurMate.removeCapability(Breeding.female);
             actor.removeCapability(Breeding.eligibleFemale);
             actor.addCapability(Breeding.pregnantFemale);
         }
