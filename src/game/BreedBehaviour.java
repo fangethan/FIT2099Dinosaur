@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class initates 2 dinasours moving together to breed
+ * This class initiates 2 dinosaurs moving together to breed
  *
  */
 public class BreedBehaviour extends FollowBehaviour{
@@ -21,7 +21,7 @@ public class BreedBehaviour extends FollowBehaviour{
      * This is the Constructor.
      *
      * @param subject the Actor to follow
-     * @param capable Checks capablity of dinasour
+     * @param capable Checks capability of dinosaur
      */
     public BreedBehaviour(Actor subject, Enum<?> capable) {
         super(subject);
@@ -60,9 +60,9 @@ public class BreedBehaviour extends FollowBehaviour{
     }
 
     /**
-     * This gets the minimum disatance to an eligble dinasour
+     * This gets the minimum distance to an eligible dinosaur
      *
-     * @param currentLocation this is the current location of the dinasour
+     * @param currentLocation this is the current location of the dinosaur
      * @param map this is the gamemap
      * @return actor at location
      */
@@ -77,9 +77,6 @@ public class BreedBehaviour extends FollowBehaviour{
             int y = spot.getValue().y();
             Location there = map.at(x,y);
             if (actor instanceof Dinosaur) {
-//                if (validActor(actor)) {
-//                    System.out.println("Valid dino");
-//                }
                 if (currentLocation != there) {
                     if (minimalLocation == null) {
                         minimalLocation = there;
@@ -94,7 +91,7 @@ public class BreedBehaviour extends FollowBehaviour{
     }
 
     /**
-     * This checks if the actor has certain capablities
+     * This checks if the actor has certain capabilities
      * @param actor
      * @return true or false
      */
@@ -102,7 +99,7 @@ public class BreedBehaviour extends FollowBehaviour{
         return actor != null && actor.hasCapability(capability);
     }
     /**
-     * This checks if the 2 dinosaours are the same species
+     * This checks if the 2 dinosaurs are the same species
      * @param mate1 1 is the first dinosaur
      * @param mate2 2 is the second dinosaur
      * @return true or false
@@ -123,15 +120,13 @@ public class BreedBehaviour extends FollowBehaviour{
 
 
     /**
-     * This gets all the dinsours on the map
+     * This gets all the dinosaurs on the map
      * @param gameMap is the map
      * @return list of all the dinosaurs
      */
     public Map<Actor, Location> getAllActors(GameMap gameMap) {
 
         Map<Actor, Location> dinosaursList = new HashMap<>();
-        int count = 0;
-        String text = "";
         for (int x: gameMap.getXRange()) {
             for (int y: gameMap.getYRange()) {
                 Location location = gameMap.at(x,y);
@@ -145,7 +140,7 @@ public class BreedBehaviour extends FollowBehaviour{
     }
 
     /**
-     * THis checks if 2 dinsours are adjacent to each other
+     * THis checks if 2 dinosaurs are adjacent to each other
      * @param mate1 is the first dinosaur
      * @param mate2 is the second dinosaur
      * @param gameMap is the mao

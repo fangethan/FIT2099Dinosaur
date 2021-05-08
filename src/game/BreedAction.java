@@ -42,17 +42,13 @@ public class BreedAction extends Action {
 
     /**
      * This checks if the actor is capable of breedimg, checking is its a male or demale
-     * or if its pregant or not
-     * @param actor This is the dinsour
+     * or if its pregnant or not
+     * @param actor This is the dinosaur
      */
     public void capability(Actor actor) {
         if (actor.hasCapability(Breeding.male)) {
-            actor.removeCapability(Breeding.eligibleMale);
-            dinosaurMate.removeCapability(Breeding.eligibleFemale);
             dinosaurMate.addCapability(Breeding.pregnantFemale);
         } else {
-            dinosaurMate.removeCapability(Breeding.female);
-            actor.removeCapability(Breeding.eligibleFemale);
             actor.addCapability(Breeding.pregnantFemale);
         }
     }

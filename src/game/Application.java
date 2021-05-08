@@ -73,8 +73,16 @@ public class Application {
 
 		gameMap.at(25, 20).addActor(male);
 		gameMap.at(60, 10).addActor(female);
-		gameMap.at(27, 20).addActor(new Stegosaur("Stegosaur",'M'));
+		gameMap.at(27, 20).addActor(new Stegosaur("Stegosaur",'F'));
 
+		gameMap.at(64,10).addActor(allosaur1);
+		gameMap.at(67,10).addActor(allosaur2);
+
+		gameMap.at(10,10).addActor(brachiosaur1);
+		gameMap.at(13,10).addActor(brachiosaur2);
+
+//		HuntBehaviour huntBehaviour = new HuntBehaviour(allosaur1);
+//		huntBehaviour.getLocation(gameMap.at(64,10),gameMap);
 
 		gameMap.at(5,7).setGround(new VendingMachine());
 

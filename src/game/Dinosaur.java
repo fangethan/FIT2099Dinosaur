@@ -13,7 +13,6 @@ public abstract class Dinosaur extends Actor {
     public int age = 32;
     private int tick = 0;
     private int pregnant = 0;
-
     private Behaviour behaviour;
     private Behaviour wanderBehaviour = new WanderBehaviour();
     /**
@@ -54,17 +53,6 @@ public abstract class Dinosaur extends Actor {
         return age;
     }
 
-//    public void setFoodLevel(int foodLevel) {
-//        this.foodLevel = foodLevel;
-//    }
-//
-//    public boolean isAdult(int limitAge) {
-//        if (getAge() > limitAge) {
-//            return true;
-//        }
-//        return false;
-//    }
-
     /**
      * This checks is the dinosaur is conscious
      * @return true or false
@@ -77,14 +65,8 @@ public abstract class Dinosaur extends Actor {
         return false;
     }
 
-    public void breedOption() {
-        /*if (hasCapability() && this.foodLevel > 50) {
-            behaviour = new BreedBehaviour(this);
-        }*/
-    }
-
     /**
-     * This determines the actions of the dinsaour based on food levels and such
+     * This determines the actions of the dinosaur based on food levels and such
      * @param actions    collection of possible Actions for this Actor
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Actor
@@ -105,19 +87,65 @@ public abstract class Dinosaur extends Actor {
             foodLevels--;
 
             if (hasCapability(Breeding.pregnantFemale)) {
-                if (pregnant > 10) {
-                    pregnant = 0;
-                    removeCapability(Breeding.pregnantFemale);
-                    map.locationOf(this).addItem(this.produceEgg());
-                    nextAction = wanderBehaviour.getAction(this,map);
+                if (this.displayChar == 'S') {
+                    if (pregnant == 10) {
+                        pregnant = 0;
+                        removeCapability(Breeding.pregnantFemale);
+                        map.locationOf(this).addItem(this.produceEgg());
+                        nextAction = wanderBehaviour.getAction(this,map);
+                    } else {
+                        pregnant++;
+                    }
+                } else if (this.displayChar == 'B') {
+                    if (pregnant == 30) {
+                        pregnant = 0;
+                        removeCapability(Breeding.pregnantFemale);
+                        map.locationOf(this).addItem(this.produceEgg());
+                        nextAction = wanderBehaviour.getAction(this,map);
+                    } else {
+                        pregnant++;
+                    }
                 } else {
-                    pregnant++;
+                    if (pregnant == 20) {
+                        pregnant = 0;
+                        removeCapability(Breeding.pregnantFemale);
+                        map.locationOf(this).addItem(this.produceEgg());
+                        nextAction = wanderBehaviour.getAction(this,map);
+                    } else {
+                        pregnant++;
+                    }
                 }
 
             }
 
+            // check if dinosaurs are hungry or need to hunt
+            if (this.foodLevels < 30) {
+                if (this.getDisplayChar() == 'A') {
+                    System.out.println("Allosaur at (" + x + "," + y + ") is hunting");
+                    behaviour = new HuntBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                } else {
+                    System.out.println("Herbivore at (" + x + "," + y + ") is hungry");
+                    behaviour = new HungerBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                }
+            }
+
             //This is to check if breeding is eligible
-            if (this.foodLevels > 50) {
+            if (this.getDisplayChar() == 'B') {
+                if (this.foodLevels > 70) {
+                    if (this.gender == 'M') {
+                        behaviour = new BreedBehaviour(this, Breeding.male);
+                    } else {
+                        behaviour = new BreedBehaviour(this, Breeding.female);
+
+                    }
+                    nextAction = behaviour.getAction(this, map);
+                }
+                if (nextAction == null) {
+                    nextAction = wanderBehaviour.getAction(this,map);
+                }
+            } else if (this.foodLevels > 50) {
                 if (this.gender == 'M') {
                     behaviour = new BreedBehaviour(this, Breeding.male);
                 } else {
@@ -127,9 +155,9 @@ public abstract class Dinosaur extends Actor {
                 nextAction = behaviour.getAction(this, map);
             }
             if (nextAction == null) {
-                return wanderBehaviour.getAction(this,map);
+                nextAction = wanderBehaviour.getAction(this,map);
             }
-             return nextAction;
+            return nextAction;
 
         } else {
             this.tick++;

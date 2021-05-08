@@ -25,7 +25,7 @@ public class Bush extends Ground implements Harvestable {
      */
     @Override
     public String harvest(Actor actor, Location location) {
-        // Add hay to inventory
+        // Add fruit to inventory
 
         Probability value = new Probability();
         float randomNumber = value.getProbability();

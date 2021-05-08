@@ -55,21 +55,15 @@ public class HuntBehaviour extends FollowBehaviour{
             int y = spot.getValue().y();
             Location there = map.at(x,y);
             if (actor instanceof Dinosaur) {
-                System.out.println("actor is dinosaur");
-//                if (validActor(actor)) {
-//                    System.out.println("Valid dino");
-//                }
-                if (minimalLocation == null) {
-                    minimalLocation = there;
-                } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
-                    minimalLocation = there;
-                    int minimumDistance = super.distance(currentLocation,there);
-                    System.out.println("Min location is: " + minimumDistance);
+                if (currentLocation != there) {
+                    if (minimalLocation == null) {
+                        minimalLocation = there;
+                    } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
+                        minimalLocation = there;
+                    }
                 }
             }
         }
-
-
 
         return map.getActorAt(minimalLocation);
     }
@@ -82,35 +76,29 @@ public class HuntBehaviour extends FollowBehaviour{
     public Map<Actor, Location> getAllActors(GameMap gameMap) {
 
         Map<Actor, Location> dinosaursList = new HashMap<>();
-        int count = 0;
-        String text = "";
         for (int x: gameMap.getXRange()) {
             for (int y: gameMap.getYRange()) {
                 Location location = gameMap.at(x,y);
                 Actor actor = gameMap.getActorAt(location);
                 if (location.containsAnActor()) {
                     dinosaursList.put(actor,location);
-                    count++;
-                    text += actor.getDisplayChar();
                 }
             }
         }
-        System.out.println("Dinosaur list" + count + text);
         return dinosaursList;
     }
     /**
      * adjacent checks if the dinosaur is next to a food source or not so they can attack/eat
-     * @param mate1 is the dinosaur
-     * @param mate2 is the target food source
+     * @param predator is the dinosaur
+     * @param prey is the target food source
      * @param gameMap is the map of the app
      * @return returns true or false depending if the actors are next to each other
      */
-    public boolean adjacent(Actor mate1, Actor mate2, GameMap gameMap) {
-        Location currentLocation = gameMap.locationOf(mate1);
+    public boolean adjacent(Actor predator, Actor prey, GameMap gameMap) {
+        Location currentLocation = gameMap.locationOf(predator);
 
         for (Exit exit: currentLocation.getExits()) {
-            if (gameMap.getActorAt(exit.getDestination()) == mate2) {
-                System.out.println("They're adjacent");
+            if (gameMap.getActorAt(exit.getDestination()) == prey) {
                 return true;
             }
         }
