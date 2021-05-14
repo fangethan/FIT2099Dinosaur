@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.*;
  */
 public abstract class Dinosaur extends Actor {
     public char gender;
-    public int foodLevels = 55;
+    public int foodLevels = 28;
     public int age = 32;
     private int tick = 0;
     private int pregnant = 0;
