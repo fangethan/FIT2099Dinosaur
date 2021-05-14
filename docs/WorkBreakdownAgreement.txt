@@ -100,4 +100,57 @@ Due date- 5/05/2021
 
 I (Cleshan Warusavitarne) agree to the Work Breakdown Agreement
 I (Ethan Fang) agree to the Work Breakdown Agreement
+
+
 _____________________________________________________________________________
+Workbreakdown Agreement Assignment 3
+Second Map
+      Creating new map
+Member responsible- Cleshan Warusavitarne
+Due date- 18/05/2021
+
+
+Upgrade Sophisticated Game Driver
+      Implement Challenge Game/ Sandbox
+Member Responsible- Cleshan Warusavitarne
+Due date- 19/05/2021
+
+Dinasour Squashing Bush
+       FInish off assignment 2 part of dinosaur squishing egg
+Member Responsible- Cleshan Warusavitarne
+Due Date- 19/05/2021
+
+Implement Lake
+    - Creating fish for lake
+    - Create rain instances
+Member Responsible- Cleshan Warusavitarne
+Due Date- 22/05/2021
+
+
+Implement Pterodactyls Eggs
+     - Eggs Instance of map
+Members Responsible- Cleshan Warusavitarne
+Due Date- 23/05/2021
+
+
+Implement Dinsoaurs Eating
+      - Eating fruits and fish
+Members Responsible- Ethan Fang
+Due Date- 20/05/2021
+
+
+Implement Dinsoaurs thirst
+      - DInsoaurs getting thirsty and moving to lake
+Members Responsible- Ethan Fang
+Due Date- 21/05/2021
+
+
+Implement new dinasour(Pterodactyl)
+      - Add dinosaur and new behaviours
+Members Responsible- Ethan Fang
+Due Date- 21/05/2021
+
+
+I (Cleshan Warusavitarne) agree to the Work Breakdown Agreement
+
+       

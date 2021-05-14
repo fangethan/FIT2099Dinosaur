@@ -23,6 +23,7 @@ public class Dirt extends Ground {
 	 * This creates bushes on the ground depending on the probabolity
 	 * @param location The location of the Ground
 	 */
+
 	public void tick(Location location) {
 		boolean hasTree = false;
 		int bushNeighbour = 0;
@@ -48,7 +49,7 @@ public class Dirt extends Ground {
 		float randomNumber = value.getProbability();
 
 		if (!hasTree) {
-			if ((bushNeighbour >= 2&& randomNumber<=0.01) || (randomNumber<0.01)){
+			if ((bushNeighbour >= 2&& randomNumber<=0.01) || (randomNumber<0.009)){
 				location.setGround(new Bush());
 
 			}
