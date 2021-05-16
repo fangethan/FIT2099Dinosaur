@@ -5,19 +5,17 @@ import edu.monash.fit2099.engine.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Returns actions to search out for herbivore meals and then eat it.
- */
-public class HungerBehaviour extends FollowBehaviour{
+public class ThirstyBehaviour extends FollowBehaviour{
+
 
     /**
-     * The HungerBehaviour constructor
-     * @param subject the actor that is hungry
+     * Constructor
+     *
+     * @param subject the Actor to follow
      */
-    public HungerBehaviour(Actor subject) {
+    public ThirstyBehaviour(Actor subject) {
         super(subject);
     }
-
     /**
      * getAction gets the actor that is hungry and the gameMap and sees if the
      * actor current location is adjacent to a food source which could be bush or tree
@@ -47,21 +45,22 @@ public class HungerBehaviour extends FollowBehaviour{
      * @return returns the minimum location of the food source
      */
     public Actor getLocation(Location currentLocation, GameMap map) {
-        Map<Item, Location> fruitList = new HashMap<>();
-        fruitList = getALLFruits(map);
+        Map<Actor, Location> fruitList = new HashMap<>();
+        fruitList = getAllLakes(map);
         Location minimalLocation = null;
 
-        for (Map.Entry<Item, Location> spot: fruitList.entrySet()) {
+        for (Map.Entry<Actor, Location> spot: fruitList.entrySet()) {
+            Actor actor = spot.getValue().getActor();
             int x = spot.getValue().x();
             int y = spot.getValue().y();
             Location there = map.at(x,y);
-            if (currentLocation != there) {
-                if (minimalLocation == null) {
-                    minimalLocation = there;
-                    System.out.println("minimalLocation at " + x + "," + y);
-                } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
-                    minimalLocation = there;
-                    System.out.println("minimalLocation at " + x + "," + y);
+            if (actor instanceof Dinosaur) {
+                if (currentLocation != there) {
+                    if (minimalLocation == null) {
+                        minimalLocation = there;
+                    } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
+                        minimalLocation = there;
+                    }
                 }
             }
         }
@@ -75,19 +74,15 @@ public class HungerBehaviour extends FollowBehaviour{
      * @param gameMap is the entire gameMap of the app
      * @return returns all the fruits found on the gameMap in a list
      */
-    public Map<Item, Location> getALLFruits(GameMap gameMap) {
-        int count = 0;
-        Map<Item, Location> fruitList = new HashMap<>();
+    public Map<Actor, Location> getAllLakes(GameMap gameMap) {
+
+        Map<Actor, Location> fruitList = new HashMap<>();
         for (int x: gameMap.getXRange()) {
             for (int y: gameMap.getYRange()) {
                 Location location = gameMap.at(x,y);
-                for (Item item: location.getItems()) {
-                    fruitList.put(item,location);
-                    count++;
-                }
+
             }
         }
-        System.out.println(count);
         return fruitList;
     }
 
