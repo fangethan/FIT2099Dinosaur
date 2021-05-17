@@ -37,8 +37,8 @@ public class HungerBehaviour extends FollowBehaviour{
         // to check if target is not null and adjacent to the target
         if (target != null && adjacent(actor, target, map)) {
             // If dinosaur is ready to eat fruit
-            nextAction = new Eat();
-            nextAction.execute(actor,map);
+//            nextAction = new Eat();
+//            nextAction.execute(actor,map);
         } else {
             // the else if checks if it is not near its fruit it can move closer towards it
             nextAction = super.getAction(actor, map);

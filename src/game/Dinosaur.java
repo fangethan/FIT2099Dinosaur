@@ -29,6 +29,14 @@ public abstract class Dinosaur extends Actor {
         this.gender = gender;
     }
 
+    public int getFoodLevels() {
+        return foodLevels;
+    }
+
+    public void setFoodLevels(int foodLevels) {
+        this.foodLevels = foodLevels;
+    }
+
     /**
      * This returns the gender of the dinosaur
      * @return gender

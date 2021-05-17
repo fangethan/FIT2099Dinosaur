@@ -5,14 +5,11 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 
-/**
- * This class is for eating
- */
-public class Eat extends Action {
+public class Drink extends Action {
     private Location location;
     private Fruit fruit;
 
-    public Eat(Location location, Fruit fruit){
+    public Drink(Location location, Fruit fruit){
         this.location = location;
         this.fruit = fruit;
     };
@@ -30,7 +27,6 @@ public class Eat extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + "ate fruit";
+        return actor + "drank water";
     }
-
 }
