@@ -91,7 +91,7 @@ public class Application {
 			bottomMap2.addExit(new Exit("next map", gameMap.at(i, min_height), "2"));
 		}
 		
-		Actor player = new Player("Player", '@', 100);
+		Actor player = new Player("Player", '@', 100, new QuittingGame());
 		world.addPlayer(player, gameMap.at(3, 2));
 		
 		// Place a pair of stegosaurs in the middle of the map

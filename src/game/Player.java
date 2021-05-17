@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.*;
  * Class representing the Player.
  */
 public class Player extends Actor {
+	private final Action quitAction;
 	/**
 	 *  the ecoPoints of the player
 	 */
@@ -22,10 +23,11 @@ public class Player extends Actor {
 	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
-	public Player(String name, char displayChar, int hitPoints) {
+	public Player(String name, char displayChar, int hitPoints, Action actionExit) {
 		super(name, displayChar, hitPoints);
 		EcoPoints.setPlayer(this);
 		ecoPoints = 1000;
+		this.quitAction = actionExit;
 	}
 
 	/**
@@ -41,7 +43,7 @@ public class Player extends Actor {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
-
+		actions.add(this.quitAction);
 		Location current = map.locationOf(this);
 		Ground currentGround = current.getGround();
 		if (currentGround instanceof Harvestable) {
