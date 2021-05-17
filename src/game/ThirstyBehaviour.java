@@ -28,13 +28,20 @@ public class ThirstyBehaviour extends FollowBehaviour{
     public Action getAction(Actor actor, GameMap map) {
         Location currentLocation = map.locationOf(actor);
 
-        Actor destination = getLocation(currentLocation, map);
+        target = getLocation(currentLocation, map);
 
-        while (target != null && adjacent(actor,destination,map) == false) {
-            return super.getAction(actor, map);
+        Action nextAction = null;
+
+        // to check if target is not null and adjacent to the target
+        if (target != null && adjacent(actor, target, map)) {
+            // If dinosaur is ready to eat fruit
+            nextAction = new Eat();
+            nextAction.execute(actor,map);
+        } else {
+            // the else if checks if it is not near its fruit it can move closer towards it
+            nextAction = super.getAction(actor, map);
         }
-
-        return super.getAction(actor, map);
+        return nextAction;
     }
 
     /**
@@ -45,22 +52,19 @@ public class ThirstyBehaviour extends FollowBehaviour{
      * @return returns the minimum location of the food source
      */
     public Actor getLocation(Location currentLocation, GameMap map) {
-        Map<Actor, Location> fruitList = new HashMap<>();
-        fruitList = getAllLakes(map);
+        Map<Location, String> water = new HashMap<>();
+        water = getAllLakes(map);
         Location minimalLocation = null;
 
-        for (Map.Entry<Actor, Location> spot: fruitList.entrySet()) {
-            Actor actor = spot.getValue().getActor();
-            int x = spot.getValue().x();
-            int y = spot.getValue().y();
+        for (Map.Entry<Location, String> spot: water.entrySet()) {
+            int x = spot.getKey().x();
+            int y = spot.getKey().y();
             Location there = map.at(x,y);
-            if (actor instanceof Dinosaur) {
-                if (currentLocation != there) {
-                    if (minimalLocation == null) {
-                        minimalLocation = there;
-                    } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
-                        minimalLocation = there;
-                    }
+            if (currentLocation != there) {
+                if (minimalLocation == null) {
+                    minimalLocation = there;
+                } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
+                    minimalLocation = there;
                 }
             }
         }
@@ -74,16 +78,21 @@ public class ThirstyBehaviour extends FollowBehaviour{
      * @param gameMap is the entire gameMap of the app
      * @return returns all the fruits found on the gameMap in a list
      */
-    public Map<Actor, Location> getAllLakes(GameMap gameMap) {
-
-        Map<Actor, Location> fruitList = new HashMap<>();
+    public Map<Location, String> getAllLakes(GameMap gameMap) {
+        int count = 0;
+        Map<Location, String> water = new HashMap<>();
         for (int x: gameMap.getXRange()) {
             for (int y: gameMap.getYRange()) {
                 Location location = gameMap.at(x,y);
-
+                if (location.equals("~")) {
+                    water.put(location,"~");
+                    count++;
+                }
             }
         }
-        return fruitList;
+        System.out.println(count);
+        System.out.println(water.size());
+        return water;
     }
 
     /**

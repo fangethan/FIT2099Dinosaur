@@ -71,6 +71,7 @@ public class BreedBehaviour extends FollowBehaviour{
         dinosaursList = getAllActors(map);
         Location minimalLocation = null;
 
+
         for (Map.Entry<Actor, Location> spot: dinosaursList.entrySet()) {
             Actor actor = spot.getValue().getActor();
             int x = spot.getValue().x();

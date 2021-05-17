@@ -124,17 +124,17 @@ public class Application {
 		gameMap.at(13,10).addActor(brachiosaur2);
 
 		Fruit fruit = new Fruit();
-//		gameMap.at(30,20).addItem(fruit);
-//		gameMap.at(28,20).addItem(fruit);
-//		gameMap.at(20,20).addItem(fruit);
+		gameMap.at(30,20).addItem(fruit);
+		gameMap.at(28,20).addItem(fruit);
+		gameMap.at(20,20).addItem(fruit);
 
-		gameMap.at(0,1).addItem(fruit);
-		gameMap.at(0,2).addItem(fruit);
-		gameMap.at(0,3).addItem(fruit);
+//		gameMap.at(0,1).addItem(fruit);
+//		gameMap.at(0,2).addItem(fruit);
+//		gameMap.at(0,3).addItem(fruit);
 
 		HungerBehaviour hungerBehaviour = new HungerBehaviour(male);
-		hungerBehaviour.getALLFruits(gameMap);
-//		hungerBehaviour.getLocation(gameMap.at(25,20),gameMap);
+//		hungerBehaviour.getALLFruits(gameMap);
+		hungerBehaviour.getLocation(gameMap.at(25,20),gameMap);
 
 //		HuntBehaviour huntBehaviour = new HuntBehaviour(allosaur1);
 //		huntBehaviour.getLocation(gameMap.at(64,10),gameMap);

@@ -30,14 +30,22 @@ public class HungerBehaviour extends FollowBehaviour{
     public Action getAction(Actor actor, GameMap map) {
         Location currentLocation = map.locationOf(actor);
 
-        Actor destination = getLocation(currentLocation, map);
+        target = getLocation(currentLocation, map);
 
-        while (target != null && adjacent(actor,destination,map) == false) {
-            return super.getAction(actor, map);
+        Action nextAction = null;
+
+        // to check if target is not null and adjacent to the target
+        if (target != null && adjacent(actor, target, map)) {
+            // If dinosaur is ready to eat fruit
+            nextAction = new Eat();
+            nextAction.execute(actor,map);
+        } else {
+            // the else if checks if it is not near its fruit it can move closer towards it
+            nextAction = super.getAction(actor, map);
         }
-
-        return super.getAction(actor, map);
+        return nextAction;
     }
+
 
     /**
      * getLocation is used to find the closest food source for the herbivores to eat
@@ -47,13 +55,13 @@ public class HungerBehaviour extends FollowBehaviour{
      * @return returns the minimum location of the food source
      */
     public Actor getLocation(Location currentLocation, GameMap map) {
-        Map<Item, Location> fruitList = new HashMap<>();
+        Map<Location, Item> fruitList = new HashMap<>();
         fruitList = getALLFruits(map);
         Location minimalLocation = null;
 
-        for (Map.Entry<Item, Location> spot: fruitList.entrySet()) {
-            int x = spot.getValue().x();
-            int y = spot.getValue().y();
+        for (Map.Entry<Location, Item> spot: fruitList.entrySet()) {
+            int x = spot.getKey().x();
+            int y = spot.getKey().y();
             Location there = map.at(x,y);
             if (currentLocation != there) {
                 if (minimalLocation == null) {
@@ -75,21 +83,40 @@ public class HungerBehaviour extends FollowBehaviour{
      * @param gameMap is the entire gameMap of the app
      * @return returns all the fruits found on the gameMap in a list
      */
-    public Map<Item, Location> getALLFruits(GameMap gameMap) {
+    public Map<Location, Item> getALLFruits(GameMap gameMap) {
         int count = 0;
-        Map<Item, Location> fruitList = new HashMap<>();
+        Map<Location, Item> fruitList = new HashMap<>();
         for (int x: gameMap.getXRange()) {
             for (int y: gameMap.getYRange()) {
                 Location location = gameMap.at(x,y);
                 for (Item item: location.getItems()) {
-                    fruitList.put(item,location);
+                    fruitList.put(location,item);
                     count++;
                 }
             }
         }
         System.out.println(count);
+        System.out.println(fruitList.size());
         return fruitList;
     }
+
+//    public boolean locationHasFruit(Location location) {
+//        // Check ground
+//        Ground ground = location.getGround();
+//        if (ground.hasCapability()) {
+//            return true;
+//        }
+//
+//        // If actor doesn't have capability, check items.
+//        for (Item item : location.getItems()) {
+//            if (item.hasCapability()) {
+//                return true;
+//            }
+//        }
+//
+//        // If nothing return false
+//        return false;
+//    }
 
     /**
      * adjacent checks if the dinosaur is next to a food source or not so they can eat the fruit
