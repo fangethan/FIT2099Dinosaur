@@ -13,7 +13,9 @@ import edu.monash.fit2099.engine.*;
 public class Application {
 
 	public static void main(String[] args) {
-		World world = new World(new Display());
+		MenuStartup menu = new MenuStartup(new Display());
+		World world = menu.initalMenu();
+		//World world = new World(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree(), new Lake());
 		
@@ -143,7 +145,9 @@ public class Application {
 
 //		BreedBehaviour breedBehaviour = new BreedBehaviour(male, Breeding.male);
 //		breedBehaviour.getAction(male,gameMap);
-
+		//MenuStartup menu = new MenuStartup(new Display(), world);
+		//menu.initalMenu();
 		world.run();
 	}
+
 }

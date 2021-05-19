@@ -26,7 +26,7 @@ public class Player extends Actor {
 	public Player(String name, char displayChar, int hitPoints, Action actionExit) {
 		super(name, displayChar, hitPoints);
 		EcoPoints.setPlayer(this);
-		ecoPoints = 1000;
+		ecoPoints = 0;
 		this.quitAction = actionExit;
 	}
 
