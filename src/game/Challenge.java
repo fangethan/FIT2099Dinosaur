@@ -25,6 +25,10 @@ public class Challenge extends World {
     @Override
     protected boolean stillRunning(){
         Player player = (Player) this.player;
+
+        if (QuittingGame.boolenEnd){
+            return false;
+        }
         if (player.getEcoPoints() >= points)
             return false;
         else if (turnsCurrently >= turn && player.getEcoPoints() < points){

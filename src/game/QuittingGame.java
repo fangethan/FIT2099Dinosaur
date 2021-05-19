@@ -6,10 +6,11 @@ import edu.monash.fit2099.engine.GameMap;
 
 public class QuittingGame extends Action{
 
-
+public static boolean boolenEnd = false;
     @Override
     public String execute(Actor actor, GameMap map) {
         //Cal function in new world passing value to exit
+        boolenEnd = true;
         return "Game Finished";
     }
 
