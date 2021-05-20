@@ -111,32 +111,41 @@ public class Application {
 		Allosaur allosaur3 = new Allosaur("Allosaur", 'F');
 
 
+		Pterodactyls pterodactyl1 = new Pterodactyls("Pterodactyl", 'M');
+		Pterodactyls pterodactyl2 = new Pterodactyls("Pterodactyl",'F');
+		Pterodactyls pterodactyl3 = new Pterodactyls("Pterodactyl",'F');
+
+		gameMap.at(25, 12).addActor(pterodactyl1);
+		gameMap.at(60, 12).addActor(pterodactyl2);
+		gameMap.at(32, 12).addActor(pterodactyl3);
+
 //		gameMap.at(25, 12).addActor(brachiosaur1);
 //		gameMap.at(60, 12).addActor(brachiosaur2);
 //		gameMap.at(32, 12).addActor(brachiosaur3);
 
-		gameMap.at(25, 20).addActor(male);
-		gameMap.at(60, 10).addActor(female);
-		gameMap.at(10, 20).addActor(new Stegosaur("Stegosaur",'F'));
+		gameMap.at(10, 20).addActor(male);
+//		gameMap.at(60, 10).addActor(female);
+//		gameMap.at(10, 20).addActor(new Stegosaur("Stegosaur",'F'));
 
-		gameMap.at(64,10).addActor(allosaur1);
+//		gameMap.at(64,10).addActor(allosaur1);
 //		gameMap.at(67,10).addActor(allosaur2);
 
-		gameMap.at(10,10).addActor(brachiosaur1);
-		gameMap.at(13,10).addActor(brachiosaur2);
+//		gameMap.at(10,10).addActor(brachiosaur1);
+//		gameMap.at(13,10).addActor(brachiosaur2);
 
 		Fruit fruit = new Fruit();
 		gameMap.at(30,20).addItem(fruit);
-		gameMap.at(28,20).addItem(fruit);
+		gameMap.at(26,20).addItem(fruit);
 		gameMap.at(20,20).addItem(fruit);
 
 //		gameMap.at(0,1).addItem(fruit);
 //		gameMap.at(0,2).addItem(fruit);
 //		gameMap.at(0,3).addItem(fruit);
 
-		HungerBehaviour hungerBehaviour = new HungerBehaviour(male);
+//		HungerBehaviour hungerBehaviour = new HungerBehaviour(male);
 //		hungerBehaviour.getALLFruits(gameMap);
-		hungerBehaviour.getLocation(gameMap.at(25,20),gameMap);
+//		hungerBehaviour.getLocation(gameMap.at(25,20),gameMap);
+//		hungerBehaviour.getAction(male,gameMap);
 
 //		HuntBehaviour huntBehaviour = new HuntBehaviour(allosaur1);
 //		huntBehaviour.getLocation(gameMap.at(64,10),gameMap);

@@ -27,6 +27,7 @@ public class VendingMachine extends Ground {
         ItemMap.put(new BrachiosaurEgg(), 500);
         ItemMap.put(new AllosaurEgg(), 100);
         ItemMap.put(new LaserGun(), 500);
+        ItemMap.put(new PterodactylEggs(), 200);
 
 
     }

@@ -7,11 +7,9 @@ import edu.monash.fit2099.engine.Location;
 
 public class Drink extends Action {
     private Location location;
-    private Fruit fruit;
 
-    public Drink(Location location, Fruit fruit){
+    public Drink(Location location){
         this.location = location;
-        this.fruit = fruit;
     };
 
     /**
@@ -20,8 +18,18 @@ public class Drink extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         Dinosaur dinosaur = (Dinosaur) actor;
-        dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 10);
-        location.removeItem(fruit);
+        if (dinosaur.getDisplayChar() == 'B' || dinosaur.getDisplayChar() == 'b') {
+            dinosaur.setWaterLevels(dinosaur.getFoodLevel() + 80);
+            if (dinosaur.getWaterLevels() > 200) {
+                dinosaur.setWaterLevels(200);
+            }
+        } else {
+            dinosaur.setWaterLevels(dinosaur.getFoodLevel() + 30);
+            if (dinosaur.getWaterLevels() > 100) {
+                dinosaur.setWaterLevels(100);
+            }
+        }
+
         return menuDescription(actor);
     }
 

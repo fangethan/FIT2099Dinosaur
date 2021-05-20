@@ -39,12 +39,19 @@ public class BreedBehaviour extends FollowBehaviour{
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
+        Action nextAction = null;
+
+        if (actor.getDisplayChar() == 'P') {
+            nextAction = pterodactylAction(actor,map);
+            return nextAction;
+        }
+
         Location currentLocation = map.locationOf(actor);
 
         target = getLocation(currentLocation, map);
 
-        Action nextAction = null;
         if (sameSpecies((Dinosaur) target, (Dinosaur) actor) == true && oppositeGenders((Dinosaur) target, (Dinosaur) actor) == true) {
+
             // to check if target is not null and adjacent to the target
             if (target != null && adjacent(actor, target, map)) {
                 // If both dinosaurs are both ready to mate
@@ -58,6 +65,7 @@ public class BreedBehaviour extends FollowBehaviour{
             return nextAction;
 
     }
+
 
     /**
      * This gets the minimum distance to an eligible dinosaur
@@ -157,6 +165,92 @@ public class BreedBehaviour extends FollowBehaviour{
         }
 
         return false;
+    }
+
+    public Action pterodactylAction(Actor actor, GameMap gameMap) {
+        Action nextAction = null;
+        Location currentLocation = gameMap.locationOf(actor);
+        target = getLocation(currentLocation, gameMap);
+        Location tree = getClosestTree(currentLocation,gameMap);
+
+        if (sameSpecies((Dinosaur) target, (Dinosaur) actor) == true && oppositeGenders((Dinosaur) target, (Dinosaur) actor) == true) {
+            // to check if target is not null and adjacent to the target
+            if (target != null && adjacent(actor, target, gameMap)) {
+                // If both dinosaurs are both ready to mate
+                nextAction = new BreedAction((Dinosaur) target);
+                nextAction.execute(actor,gameMap);
+            } else if (gameMap.locationOf(target) != tree){
+                // move closer to tree
+                nextAction = moveTree(target,gameMap,tree);
+            } else {
+                // the else if checks if it is not near its mate and still fertile so it can move closer towards it
+                nextAction = super.getAction(actor, gameMap);
+            }
+        }
+
+        return nextAction;
+    }
+
+    public Action moveTree(Actor actor, GameMap map, Location there) {
+        Location here = map.locationOf(actor);
+
+        int currentDistance = distance(here, there);
+        for (Exit exit : here.getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.canActorEnter(actor)) {
+                int newDistance = distance(destination, there);
+                if (newDistance < currentDistance) {
+                    return new MoveActorAction(destination, exit.getName());
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * getLocation is used to find the closest food source for the herbivores to eat
+     * out of all the bushes/trees around the map
+     * @param currentLocation is the current location of the dinosaur
+     * @param map is the gameMap of the app
+     * @return returns the minimum location of the food source
+     */
+    public Location getClosestTree(Location currentLocation, GameMap map) {
+        Map<Location, Ground> treeList = new HashMap<>();
+        treeList = getAllTrees(map);
+        Location minimalLocation = null;
+
+        for (Map.Entry<Location, Ground> spot: treeList.entrySet()) {
+            int x = spot.getKey().x();
+            int y = spot.getKey().y();
+            Location there = map.at(x,y);
+            if (minimalLocation == null) {
+                minimalLocation = there;
+            } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
+                minimalLocation = there;
+            }
+        }
+
+        return minimalLocation;
+    }
+
+
+    /**
+     * getAllFruits gets all the fruits on trees or bushes on the gameMap
+     * @param gameMap is the entire gameMap of the app
+     * @return returns all the fruits found on the gameMap in a list
+     */
+    public Map<Location, Ground> getAllTrees(GameMap gameMap) {
+        Map<Location, Ground> treeList = new HashMap<>();
+        for (int x: gameMap.getXRange()) {
+            for (int y: gameMap.getYRange()) {
+                Location location = gameMap.at(x,y);
+                if (location.getGround() instanceof Tree) {
+                    treeList.put(location,location.getGround());
+                }
+            }
+        }
+        return treeList;
     }
 
 

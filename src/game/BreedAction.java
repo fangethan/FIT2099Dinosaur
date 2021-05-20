@@ -33,6 +33,9 @@ public class BreedAction extends Action {
         } else if (species.equals("Brachiosaur")) {
             capability(actor);
             return "Brachiosaur has mated";
+        } else if (species.equals("Pterodactyl")) {
+            capability(actor);
+            return "Pterodactyls has mated";
         } else {
             capability(actor);
             return "Allosaur has mated";

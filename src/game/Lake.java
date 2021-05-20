@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.Location;
 
 import java.util.Random;
 
-public class Lake  extends Ground {
+public class Lake extends Ground {
 
     int capacity;
     int turnNumber;

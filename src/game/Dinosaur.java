@@ -9,7 +9,8 @@ import edu.monash.fit2099.engine.*;
  */
 public abstract class Dinosaur extends Actor {
     public char gender;
-    public int foodLevels = 28;
+    public int foodLevels = 60;
+    public int waterLevels = 60;
     public int age = 32;
     private int tick = 0;
     private int pregnant = 0;
@@ -27,6 +28,14 @@ public abstract class Dinosaur extends Actor {
         super(name, displayChar, hitPoints);
         this.behaviour = new WanderBehaviour();
         this.gender = gender;
+    }
+
+    public int getWaterLevels() {
+        return waterLevels;
+    }
+
+    public void setWaterLevels(int waterLevels) {
+        this.waterLevels = waterLevels;
     }
 
     public int getFoodLevels() {
@@ -67,7 +76,7 @@ public abstract class Dinosaur extends Actor {
      */
     @Override
     public boolean isConscious() {
-        if (foodLevels > 0 || hitPoints > 0) {
+        if (foodLevels > 0 && hitPoints > 0 && waterLevels > 0) {
             return true;
         }
         return false;
@@ -84,6 +93,7 @@ public abstract class Dinosaur extends Actor {
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
         System.out.println("Food levels: " + foodLevels);
+        System.out.println("Water levels: " + waterLevels);
         Location location = map.locationOf(this);
         int x = location.x();
         int y = location.y();
@@ -93,6 +103,7 @@ public abstract class Dinosaur extends Actor {
         if (isConscious()) {
             //Reduces food level each turn
             foodLevels--;
+            waterLevels--;
 
             if (hasCapability(Breeding.pregnantFemale)) {
                 if (this.displayChar == 'S') {
@@ -113,6 +124,15 @@ public abstract class Dinosaur extends Actor {
                     } else {
                         pregnant++;
                     }
+                } else if (this.displayChar == 'P') {
+                    if (pregnant == 10) {
+                        pregnant = 0;
+                        removeCapability(Breeding.pregnantFemale);
+                        map.locationOf(this).addItem(this.produceEgg());
+                        nextAction = wanderBehaviour.getAction(this,map);
+                    } else {
+                        pregnant++;
+                    }
                 } else {
                     if (pregnant == 20) {
                         pregnant = 0;
@@ -126,14 +146,43 @@ public abstract class Dinosaur extends Actor {
 
             }
 
+            // check if dinosaurs are thirsty
+            if (this.waterLevels < 40) {
+                if (this.getDisplayChar() == 'A') {
+                    System.out.println("Allosaur at (" + x + "," + y + ") is getting thirsty");
+                    behaviour = new ThirstyBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                } else if (this.getDisplayChar() == 'p') {
+                    System.out.println("Pterodactyl at (" + x + "," + y + ") is getting thirsty");
+                    behaviour = new ThirstyBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                } else if (this.getDisplayChar() == 'S') {
+                    System.out.println("Stegosaur at (" + x + "," + y + ") is getting thirsty");
+                    behaviour = new ThirstyBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                } else{
+                    System.out.println("Brachiosaur at (" + x + "," + y + ") is getting thirsty");
+                    behaviour = new ThirstyBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                }
+            }
+
             // check if dinosaurs are hungry or need to hunt
             if (this.foodLevels < 30) {
                 if (this.getDisplayChar() == 'A') {
                     System.out.println("Allosaur at (" + x + "," + y + ") is hunting");
                     behaviour = new HuntBehaviour(this);
                     nextAction = behaviour.getAction(this, map);
-                } else {
-                    System.out.println("Herbivore at (" + x + "," + y + ") is hungry");
+                } else if (this.getDisplayChar() == 'p') {
+                    System.out.println("Pterodactyl at (" + x + "," + y + ") is hunting");
+                    behaviour = new HuntBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                } else if (this.getDisplayChar() == 'S') {
+                    System.out.println("Stegosaur at (" + x + "," + y + ") is hungry");
+                    behaviour = new HungerBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                } else{
+                    System.out.println("Brachiosaur at (" + x + "," + y + ") is hungry");
                     behaviour = new HungerBehaviour(this);
                     nextAction = behaviour.getAction(this, map);
                 }
@@ -153,12 +202,23 @@ public abstract class Dinosaur extends Actor {
                 if (nextAction == null) {
                     nextAction = wanderBehaviour.getAction(this,map);
                 }
+            } else if (this.getDisplayChar() == 'P') {
+                if (this.foodLevels > 50) {
+                    if (this.gender == 'M') {
+                        behaviour = new BreedBehaviour(this, Breeding.male);
+                    } else {
+                        behaviour = new BreedBehaviour(this, Breeding.female);
+                    }
+                    nextAction = behaviour.getAction(this, map);
+                }
+                if (nextAction == null) {
+                    nextAction = wanderBehaviour.getAction(this,map);
+                }
             } else if (this.foodLevels > 50) {
                 if (this.gender == 'M') {
                     behaviour = new BreedBehaviour(this, Breeding.male);
                 } else {
                     behaviour = new BreedBehaviour(this, Breeding.female);
-
                 }
                 nextAction = behaviour.getAction(this, map);
             }
@@ -191,6 +251,11 @@ public abstract class Dinosaur extends Actor {
         Eggs egg = new Eggs();
         return egg;
     }
+
+//    public Dinosaur hatching(Eggs egg){
+//
+//    }
+
 }
 
 
