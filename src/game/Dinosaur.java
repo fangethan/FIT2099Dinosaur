@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.*;
 public abstract class Dinosaur extends Actor {
     public char gender;
     public int foodLevels = 60;
-    public int waterLevels = 60;
+    public int waterLevels = 2;
     public int age = 32;
     private int tick = 0;
     private int hatchTick = 0;
@@ -98,6 +98,16 @@ public abstract class Dinosaur extends Actor {
         Location location = map.locationOf(this);
         int x = location.x();
         int y = location.y();
+
+        // Rain and making sure uncoius becomes consicous again
+        Probability value = new Probability();
+        float randomNumber = value.getProbability();
+        if (randomNumber< 0.9){
+            RainAction rain = new RainAction(map);
+            rain.rain();
+        }
+
+
 
         Action nextAction = null;
 
