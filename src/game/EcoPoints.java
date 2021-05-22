@@ -22,4 +22,6 @@ public class EcoPoints {
         player.addPoints(ecoPoints);
     }
 
+
+
 }

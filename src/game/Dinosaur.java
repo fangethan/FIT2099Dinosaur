@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.*;
 public abstract class Dinosaur extends Actor {
     public char gender;
     public int foodLevels = 60;
-    public int waterLevels = 2;
+    public int waterLevels = 20;
     public int age = 32;
     private int tick = 0;
     private int hatchTick = 0;
@@ -123,7 +123,7 @@ public abstract class Dinosaur extends Actor {
                     if (pregnant == 10) {
                         pregnant = 0;
                         removeCapability(Breeding.pregnantFemale);
-                        map.locationOf(this).addItem(this.produceEgg('s'));
+                        map.locationOf(this).addItem(this.produceEgg(this));
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
@@ -132,16 +132,16 @@ public abstract class Dinosaur extends Actor {
                     if (pregnant == 30) {
                         pregnant = 0;
                         removeCapability(Breeding.pregnantFemale);
-                        map.locationOf(this).addItem(this.produceEgg('b'));
+                        map.locationOf(this).addItem(this.produceEgg(this));
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
                     }
                 } else if (this.displayChar == 'P') {
-                    if (pregnant == 10) {
+                    if (pregnant == 1) {
                         pregnant = 0;
                         removeCapability(Breeding.pregnantFemale);
-                        map.locationOf(this).addItem(this.produceEgg('p'));
+                        map.locationOf(this).addItem(this.produceEgg(this));
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
@@ -150,7 +150,7 @@ public abstract class Dinosaur extends Actor {
                     if (pregnant == 20) {
                         pregnant = 0;
                         removeCapability(Breeding.pregnantFemale);
-                        map.locationOf(this).addItem(this.produceEgg('a'));
+                        map.locationOf(this).addItem(this.produceEgg(this));
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
@@ -165,7 +165,7 @@ public abstract class Dinosaur extends Actor {
                     System.out.println("Allosaur at (" + x + "," + y + ") is getting thirsty");
                     behaviour = new ThirstyBehaviour(this);
                     nextAction = behaviour.getAction(this, map);
-                } else if (this.getDisplayChar() == 'p') {
+                } else if (this.getDisplayChar() == 'P') {
                     System.out.println("Pterodactyl at (" + x + "," + y + ") is getting thirsty");
                     behaviour = new ThirstyBehaviour(this);
                     nextAction = behaviour.getAction(this, map);
@@ -269,9 +269,8 @@ public abstract class Dinosaur extends Actor {
      * Egg created by Dinosaurs after breeding
      * @return egg with a baby dinosaur
      */
-    public Eggs produceEgg(char species) {
-        Eggs egg = new Eggs();
-        egg.setSpecies(species);
+    public Eggs produceEgg(Dinosaur dinosaur) {
+        Eggs egg = new Eggs(dinosaur);
         return egg;
     }
 

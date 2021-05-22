@@ -41,10 +41,10 @@ public class BreedBehaviour extends FollowBehaviour{
     public Action getAction(Actor actor, GameMap map) {
         Action nextAction = null;
 
-        if (actor.getDisplayChar() == 'P') {
-            nextAction = pterodactylAction(actor,map);
-            return nextAction;
-        }
+//        if (actor.getDisplayChar() == 'P') {
+//            nextAction = pterodactylAction(actor,map);
+//            return nextAction;
+//        }
 
         Location currentLocation = map.locationOf(actor);
 
@@ -176,12 +176,13 @@ public class BreedBehaviour extends FollowBehaviour{
         if (sameSpecies((Dinosaur) target, (Dinosaur) actor) == true && oppositeGenders((Dinosaur) target, (Dinosaur) actor) == true) {
             // to check if target is not null and adjacent to the target
             if (target != null && adjacent(actor, target, gameMap)) {
+                // move closer to tree
+                nextAction = moveTree(target,gameMap,tree);
+
+            } else if (gameMap.locationOf(target) != tree){
                 // If both dinosaurs are both ready to mate
                 nextAction = new BreedAction((Dinosaur) target);
                 nextAction.execute(actor,gameMap);
-            } else if (gameMap.locationOf(target) != tree){
-                // move closer to tree
-                nextAction = moveTree(target,gameMap,tree);
             } else {
                 // the else if checks if it is not near its mate and still fertile so it can move closer towards it
                 nextAction = super.getAction(actor, gameMap);
@@ -226,10 +227,10 @@ public class BreedBehaviour extends FollowBehaviour{
             Location there = map.at(x,y);
             if (minimalLocation == null) {
                 minimalLocation = there;
-                System.out.println("Minimal location is: " + x + "," + y);
+//                System.out.println("Minimal location is: " + x + "," + y);
             } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
                 minimalLocation = there;
-                System.out.println("Minimal location is: " + x + "," + y);
+//                System.out.println("Minimal location is: " + x + "," + y);
             }
         }
         return minimalLocation;
@@ -251,7 +252,7 @@ public class BreedBehaviour extends FollowBehaviour{
                 }
             }
         }
-        System.out.println(treeList.size());
+//        System.out.println(treeList.size());
         return treeList;
     }
 

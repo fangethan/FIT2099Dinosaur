@@ -1,25 +1,32 @@
 package game;
 
+import edu.monash.fit2099.engine.Location;
+
 /**
  * This class is for eggs which extend food
  */
 public class Eggs extends Food{
-    private char species;
+    private Dinosaur dinosaur;
+    private int hatch = 0;
+
     /**
      * This is the cosntructor
      * display char is e
      */
-    public Eggs() {
+    public Eggs(Dinosaur dinosaur) {
         super("Egg", 'e', true);
+        this.dinosaur = dinosaur;
     }
 
-    public char getSpecies() {
-        return species;
-    }
+//    @Override
+//    public void tick(Location currentLocation) {
+//        hatch++;
+//        if (hatch == 1) {
+//            currentLocation.removeItem(this);
+//            currentLocation.addActor(new Stegosaur("Steosaur", 'M'));
+//        }
+//    }
 
-    public void setSpecies(char species) {
-        this.species = species;
-    }
 
     /**
      * THis gets the name

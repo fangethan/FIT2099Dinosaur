@@ -38,7 +38,7 @@ public class MenuStartup {
 
     public int selectMenuItem(){
         //This asks for user input to create a buyer or next car
-        System.out.println("CHoose a game mode");
+        System.out.println("Choose a game mode");
         System.out.println("1) Challenge");
         System.out.println("2) Sandbox");
         System.out.println("3) Exit");

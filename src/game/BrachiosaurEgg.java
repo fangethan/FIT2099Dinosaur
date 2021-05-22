@@ -5,6 +5,15 @@ package game;
         */
 public class BrachiosaurEgg extends Eggs{
     /**
+     * This is the cosntructor
+     * display char is e
+     *
+     */
+    public BrachiosaurEgg() {
+        super(new Brachiosaur("Brachiosaur",'M'));
+    }
+
+    /**
      * This retruns the name of the class
      * @return String BrachiosaurEgg
      */
