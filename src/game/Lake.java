@@ -45,9 +45,9 @@ public class Lake extends Ground {
         }
     @Override
     public boolean canActorEnter(Actor actor) {
-        if (actor.getDisplayChar() == 'B'){
-            return false;
+        if (actor.getDisplayChar() == 'P' || actor.getDisplayChar() == 'p'){
+            return true;
         }
-        return true;
+        return false;
     }
 }
