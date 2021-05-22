@@ -45,10 +45,8 @@ public class Lake extends Ground {
             }
         }
 
-
-
         // Rainfall
-        if (turnNumber == 2) {
+        if (turnNumber == 10) {
 
             if (randomNumber<0.2){
                 Random r = new Random();

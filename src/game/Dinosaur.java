@@ -102,7 +102,7 @@ public abstract class Dinosaur extends Actor {
         // Rain and making sure uncoius becomes consicous again
         Probability value = new Probability();
         float randomNumber = value.getProbability();
-        if (randomNumber< 0.9){
+        if (randomNumber< 0.2){
             RainAction rain = new RainAction(map);
             rain.rain();
         }

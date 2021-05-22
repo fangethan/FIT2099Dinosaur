@@ -26,7 +26,7 @@ public class RainAction {
             if (actor instanceof Dinosaur) {
                 if (((Dinosaur) actor).getWaterLevels() == 0) {
                     ((Dinosaur) actor).setWaterLevels(10);
-                    System.out.println("fssf");
+                    //System.out.println("fssf");
                 }
             }
 
