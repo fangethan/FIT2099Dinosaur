@@ -22,7 +22,14 @@ public class Eat extends Action {
         Dinosaur dinosaur = (Dinosaur) actor;
         dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 10);
         for (int i = 0; i < location.getItems().size(); i++) {
-            location.removeItem(location.getItems().get(i));
+
+            if (dinosaur.getDisplayChar() == 'S' || dinosaur.getDisplayChar() == 's') {
+                location.removeItem(location.getItems().get(i));
+                dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 10);
+            } else if (dinosaur.getDisplayChar() == 'B' || dinosaur.getDisplayChar() == 'b') {
+                location.removeItem(location.getItems().get(i));
+                dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 5);
+            } 
         }
 
         return menuDescription(actor);

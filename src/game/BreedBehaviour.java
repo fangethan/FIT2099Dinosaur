@@ -226,11 +226,12 @@ public class BreedBehaviour extends FollowBehaviour{
             Location there = map.at(x,y);
             if (minimalLocation == null) {
                 minimalLocation = there;
+                System.out.println("Minimal location is: " + x + "," + y);
             } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
                 minimalLocation = there;
+                System.out.println("Minimal location is: " + x + "," + y);
             }
         }
-
         return minimalLocation;
     }
 
@@ -250,6 +251,7 @@ public class BreedBehaviour extends FollowBehaviour{
                 }
             }
         }
+        System.out.println(treeList.size());
         return treeList;
     }
 

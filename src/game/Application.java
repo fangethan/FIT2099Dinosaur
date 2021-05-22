@@ -119,6 +119,11 @@ public class Application {
 		gameMap.at(60, 12).addActor(pterodactyl2);
 		gameMap.at(32, 12).addActor(pterodactyl3);
 
+//		BreedBehaviour breedBehaviour = new BreedBehaviour(pterodactyl1, Breeding.male);
+//		breedBehaviour.getAction(pterodactyl1,gameMap);
+//		breedBehaviour.getAllTrees(gameMap);
+//		breedBehaviour.getClosestTree(gameMap.at(32, 12),gameMap);
+
 //		gameMap.at(25, 12).addActor(brachiosaur1);
 //		gameMap.at(60, 12).addActor(brachiosaur2);
 //		gameMap.at(32, 12).addActor(brachiosaur3);

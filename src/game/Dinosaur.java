@@ -13,6 +13,7 @@ public abstract class Dinosaur extends Actor {
     public int waterLevels = 60;
     public int age = 32;
     private int tick = 0;
+    private int hatchTick = 0;
     private int pregnant = 0;
     private Behaviour behaviour;
     private Behaviour wanderBehaviour = new WanderBehaviour();
@@ -105,12 +106,14 @@ public abstract class Dinosaur extends Actor {
             foodLevels--;
             waterLevels--;
 
+//            hatching(map);
+
             if (hasCapability(Breeding.pregnantFemale)) {
                 if (this.displayChar == 'S') {
                     if (pregnant == 10) {
                         pregnant = 0;
                         removeCapability(Breeding.pregnantFemale);
-                        map.locationOf(this).addItem(this.produceEgg());
+                        map.locationOf(this).addItem(this.produceEgg('s'));
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
@@ -119,7 +122,7 @@ public abstract class Dinosaur extends Actor {
                     if (pregnant == 30) {
                         pregnant = 0;
                         removeCapability(Breeding.pregnantFemale);
-                        map.locationOf(this).addItem(this.produceEgg());
+                        map.locationOf(this).addItem(this.produceEgg('b'));
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
@@ -128,7 +131,7 @@ public abstract class Dinosaur extends Actor {
                     if (pregnant == 10) {
                         pregnant = 0;
                         removeCapability(Breeding.pregnantFemale);
-                        map.locationOf(this).addItem(this.produceEgg());
+                        map.locationOf(this).addItem(this.produceEgg('p'));
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
@@ -137,7 +140,7 @@ public abstract class Dinosaur extends Actor {
                     if (pregnant == 20) {
                         pregnant = 0;
                         removeCapability(Breeding.pregnantFemale);
-                        map.locationOf(this).addItem(this.produceEgg());
+                        map.locationOf(this).addItem(this.produceEgg('a'));
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
@@ -168,25 +171,25 @@ public abstract class Dinosaur extends Actor {
             }
 
             // check if dinosaurs are hungry or need to hunt
-            if (this.foodLevels < 30) {
-                if (this.getDisplayChar() == 'A') {
-                    System.out.println("Allosaur at (" + x + "," + y + ") is hunting");
-                    behaviour = new HuntBehaviour(this);
-                    nextAction = behaviour.getAction(this, map);
-                } else if (this.getDisplayChar() == 'p') {
-                    System.out.println("Pterodactyl at (" + x + "," + y + ") is hunting");
-                    behaviour = new HuntBehaviour(this);
-                    nextAction = behaviour.getAction(this, map);
-                } else if (this.getDisplayChar() == 'S') {
-                    System.out.println("Stegosaur at (" + x + "," + y + ") is hungry");
-                    behaviour = new HungerBehaviour(this);
-                    nextAction = behaviour.getAction(this, map);
-                } else{
-                    System.out.println("Brachiosaur at (" + x + "," + y + ") is hungry");
-                    behaviour = new HungerBehaviour(this);
-                    nextAction = behaviour.getAction(this, map);
-                }
-            }
+//            if (this.foodLevels < 30) {
+//                if (this.getDisplayChar() == 'A') {
+//                    System.out.println("Allosaur at (" + x + "," + y + ") is hunting");
+//                    behaviour = new HuntBehaviour(this);
+//                    nextAction = behaviour.getAction(this, map);
+//                } else if (this.getDisplayChar() == 'p') {
+//                    System.out.println("Pterodactyl at (" + x + "," + y + ") is hunting");
+//                    behaviour = new HuntBehaviour(this);
+//                    nextAction = behaviour.getAction(this, map);
+//                } else if (this.getDisplayChar() == 'S') {
+//                    System.out.println("Stegosaur at (" + x + "," + y + ") is hungry");
+//                    behaviour = new HungerBehaviour(this);
+//                    nextAction = behaviour.getAction(this, map);
+//                } else {
+//                    System.out.println("Brachiosaur at (" + x + "," + y + ") is hungry");
+//                    behaviour = new HungerBehaviour(this);
+//                    nextAction = behaviour.getAction(this, map);
+//                }
+//            }
 
             //This is to check if breeding is eligible
             if (this.getDisplayChar() == 'B') {
@@ -202,7 +205,7 @@ public abstract class Dinosaur extends Actor {
                 if (nextAction == null) {
                     nextAction = wanderBehaviour.getAction(this,map);
                 }
-            } else if (this.getDisplayChar() == 'P') {
+            } else {
                 if (this.foodLevels > 50) {
                     if (this.gender == 'M') {
                         behaviour = new BreedBehaviour(this, Breeding.male);
@@ -214,13 +217,6 @@ public abstract class Dinosaur extends Actor {
                 if (nextAction == null) {
                     nextAction = wanderBehaviour.getAction(this,map);
                 }
-            } else if (this.foodLevels > 50) {
-                if (this.gender == 'M') {
-                    behaviour = new BreedBehaviour(this, Breeding.male);
-                } else {
-                    behaviour = new BreedBehaviour(this, Breeding.female);
-                }
-                nextAction = behaviour.getAction(this, map);
             }
             if (nextAction == null) {
                 nextAction = wanderBehaviour.getAction(this,map);
@@ -243,18 +239,33 @@ public abstract class Dinosaur extends Actor {
         return new DoNothingAction();
 
     }
+
+//    private void hatching(GameMap map) {
+//        for (int x: map.getXRange()) {
+//            for (int y: map.getYRange()) {
+//                Location location = map.at(x,y);
+//                for (int i = 0; i < location.getItems().size(); i++) {
+//                    if (location.getItems().get(i).getDisplayChar() == 'e') {
+//                        location.removeItem(location.getItems().get(i));
+//                        System.out.println(location.getItems().get(i).getClass().getName());
+////                        location.addActor();
+//                    }
+//                }
+//            }
+//        }
+//    }
+
     /**
      * Egg created by Dinosaurs after breeding
      * @return egg with a baby dinosaur
      */
-    public Eggs produceEgg() {
+    public Eggs produceEgg(char species) {
         Eggs egg = new Eggs();
+        egg.setSpecies(species);
         return egg;
     }
 
-//    public Dinosaur hatching(Eggs egg){
-//
-//    }
+
 
 }
 
