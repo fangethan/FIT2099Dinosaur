@@ -115,9 +115,9 @@ public class Application {
 		Pterodactyls pterodactyl2 = new Pterodactyls("Pterodactyl",'F');
 		Pterodactyls pterodactyl3 = new Pterodactyls("Pterodactyl",'F');
 
-		gameMap.at(25, 12).addActor(pterodactyl1);
-		gameMap.at(60, 12).addActor(pterodactyl2);
-		gameMap.at(32, 12).addActor(pterodactyl3);
+		gameMap.at(30, 12).addActor(pterodactyl1);
+//		gameMap.at(2, 2).addActor(pterodactyl2);
+//		gameMap.at(32, 12).addActor(pterodactyl3);
 
 //		BreedBehaviour breedBehaviour = new BreedBehaviour(pterodactyl1, Breeding.male);
 //		breedBehaviour.getAction(pterodactyl1,gameMap);
@@ -128,11 +128,17 @@ public class Application {
 //		gameMap.at(60, 12).addActor(brachiosaur2);
 //		gameMap.at(32, 12).addActor(brachiosaur3);
 
-		gameMap.at(10, 20).addActor(male);
+//		gameMap.at(10, 20).addActor(male);
 //		gameMap.at(60, 10).addActor(female);
-//		gameMap.at(10, 20).addActor(new Stegosaur("Stegosaur",'F'));
+//		gameMap.at(10, 24).addActor(new Stegosaur("Stegosaur",'F'));
 
-//		gameMap.at(64,10).addActor(allosaur1);
+		gameMap.at(64,10).addActor(allosaur1);
+		Corpse corpse = new Corpse();
+		gameMap.at(30,10).addItem(corpse);
+		HuntBehaviour huntBehaviour = new HuntBehaviour(allosaur1);
+		huntBehaviour.getAllActors(gameMap);
+//		huntBehaviour.getLocation(gameMap.at(64,10),gameMap);
+
 //		gameMap.at(67,10).addActor(allosaur2);
 
 //		gameMap.at(10,10).addActor(brachiosaur1);
@@ -152,8 +158,7 @@ public class Application {
 //		hungerBehaviour.getLocation(gameMap.at(25,20),gameMap);
 //		hungerBehaviour.getAction(male,gameMap);
 
-//		HuntBehaviour huntBehaviour = new HuntBehaviour(allosaur1);
-//		huntBehaviour.getLocation(gameMap.at(64,10),gameMap);
+
 
 		gameMap.at(5,7).setGround(new VendingMachine());
 

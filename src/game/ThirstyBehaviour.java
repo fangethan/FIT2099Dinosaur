@@ -104,7 +104,6 @@ public class ThirstyBehaviour extends FollowBehaviour{
                 }
             }
         }
-        System.out.println(water.size());
         return water;
     }
 

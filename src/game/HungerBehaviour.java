@@ -29,24 +29,28 @@ public class HungerBehaviour extends FollowBehaviour{
     @Override
     public Action getAction(Actor actor, GameMap map) {
         Location currentLocation = map.locationOf(actor);
-
         Location destination = getLocation(currentLocation, map);
 
         Action nextAction = null;
 
-        // to check if target is not null and adjacent to the target
-        if (sameSpot(actor, destination, map)) {
-            // If dinosaur is ready to eat fruit
-            nextAction = new Eat(destination);
-
-            nextAction.execute(actor,map);
-        } else {
-            // the else if checks if it is not near its fruit it can move closer towards it
-            nextAction = nextMoveAction(actor,map,destination);
+        if (destination != null) {
+            // to check if target is not null and adjacent to the target
+            if (sameSpot(actor, destination, map)) {
+                // If dinosaur is ready to eat fruit
+                nextAction = new Eat(destination);
+                nextAction.execute(actor,map);
+            } else {
+                // the else if checks if it is not near its fruit it can move closer towards it
+                nextAction = nextMoveAction(actor,map,destination);
+            }
         }
+
         return nextAction;
     }
 
+    // so instead of calling the super getAction in follow behaviour
+    // this method is a replacement which allows for actors to follow to a location aka an item
+    // so they can eat it
     public Action nextMoveAction(Actor actor, GameMap map, Location there) {
         Location here = map.locationOf(actor);
 
@@ -73,41 +77,69 @@ public class HungerBehaviour extends FollowBehaviour{
      * @return returns the minimum location of the food source
      */
     public Location getLocation(Location currentLocation, GameMap map) {
-        Map<Location, Item> fruitList = new HashMap<>();
-        fruitList = getALLFruits(map);
+        Map<Location, Item> foodList = new HashMap<>();
+        Actor actor = currentLocation.getActor();
+        foodList = getFood(map);
         Location minimalLocation = null;
 
-        for (Map.Entry<Location, Item> spot: fruitList.entrySet()) {
-            int x = spot.getKey().x();
-            int y = spot.getKey().y();
-            Location there = map.at(x,y);
-            if (minimalLocation == null) {
-                minimalLocation = there;
-            } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
-                minimalLocation = there;
+        if (foodList.size() > 0) {
+            for (Map.Entry<Location, Item> spot: foodList.entrySet()) {
+                // get the location of food and the food name
+                int x = spot.getKey().x();
+                int y = spot.getKey().y();
+                char foodName = spot.getValue().getDisplayChar();
+                // sees what the dinosaur species is first
+                if (actor.getDisplayChar() == 'P' || actor.getDisplayChar() == 'p') {
+                    // checks if the food is allowed for dinosaur to eat
+                    if (foodName == 'c' || foodName == '%') {
+//                    System.out.println(foodName + ": " + x + ',' + y);
+                        minimalLocation = minimumLocation(x,y,map,currentLocation);
+                    }
+                } else if (actor.getDisplayChar() == 'S' || actor.getDisplayChar() == 's' ||
+                        actor.getDisplayChar() == 'B' || actor.getDisplayChar() == 'b') {
+                    if (foodName == 'f') {
+//                    System.out.println(foodName + ": " + x + ',' + y);
+                        minimalLocation = minimumLocation(x,y,map,currentLocation);
+                    }
+                }
+
             }
         }
 
         return minimalLocation;
     }
 
+    // this method finds the minimum location
+    // implemented to save effiency in the getLocation so there will be
+    // less repeated lines in the if else inside the foreach loop
+    public Location minimumLocation(int x, int y, GameMap map, Location currentLocation) {
+        Location there = map.at(x,y);
+        Location minimalLocation = null;
+        if (minimalLocation == null) {
+            minimalLocation = there;
+        } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
+            minimalLocation = there;
+        }
+        return minimalLocation;
+    }
+
 
     /**
-     * getAllFruits gets all the fruits on trees or bushes on the gameMap
+     * getFood gets all the food items on the gameMap
      * @param gameMap is the entire gameMap of the app
      * @return returns all the fruits found on the gameMap in a list
      */
-    public Map<Location, Item> getALLFruits(GameMap gameMap) {
-        Map<Location, Item> fruitList = new HashMap<>();
+    public Map<Location, Item> getFood(GameMap gameMap) {
+        Map<Location, Item> foodList = new HashMap<>();
         for (int x: gameMap.getXRange()) {
             for (int y: gameMap.getYRange()) {
                 Location location = gameMap.at(x,y);
                 for (Item item: location.getItems()) {
-                    fruitList.put(location,item);
+                    foodList.put(location,item);
                 }
             }
         }
-        return fruitList;
+        return foodList;
     }
 
 

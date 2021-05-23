@@ -9,8 +9,8 @@ import edu.monash.fit2099.engine.*;
  */
 public abstract class Dinosaur extends Actor {
     public char gender;
-    public int foodLevels = 60;
-    public int waterLevels = 20;
+    public int foodLevels = 25;
+    public int waterLevels = 60;
     public int age = 32;
     private int tick = 0;
     private int hatchTick = 0;
@@ -118,6 +118,18 @@ public abstract class Dinosaur extends Actor {
 
 //            hatching(map);
 
+//            Actor player = new Player("Player", '@', 100, new QuittingGame());
+//            map.at(26, 12).addActor(player);
+//            if (adjacent(this,player,map) == true) {
+//                for (Item item : player.getInventory()) {
+//                    if (item instanceof Food) {
+//                        Feed feed = new Feed(this,(Food) item);
+//                        feed.execute(player,map);
+//                    }
+//                }
+//            }
+
+            // if dinosaur is pregnant and may be ready to produce egg
             if (hasCapability(Breeding.pregnantFemale)) {
                 if (this.displayChar == 'S') {
                     if (pregnant == 10) {
@@ -156,24 +168,23 @@ public abstract class Dinosaur extends Actor {
                         pregnant++;
                     }
                 }
-
             }
 
             // check if dinosaurs are thirsty
             if (this.waterLevels < 40) {
-                if (this.getDisplayChar() == 'A') {
+                if (this.getDisplayChar() == 'A' || this.getDisplayChar() == 'a') {
                     System.out.println("Allosaur at (" + x + "," + y + ") is getting thirsty");
                     behaviour = new ThirstyBehaviour(this);
                     nextAction = behaviour.getAction(this, map);
-                } else if (this.getDisplayChar() == 'P') {
+                } else if (this.getDisplayChar() == 'P' || this.getDisplayChar() == 'p') {
                     System.out.println("Pterodactyl at (" + x + "," + y + ") is getting thirsty");
                     behaviour = new ThirstyBehaviour(this);
                     nextAction = behaviour.getAction(this, map);
-                } else if (this.getDisplayChar() == 'S') {
+                } else if (this.getDisplayChar() == 'S' || this.getDisplayChar() == 's') {
                     System.out.println("Stegosaur at (" + x + "," + y + ") is getting thirsty");
                     behaviour = new ThirstyBehaviour(this);
                     nextAction = behaviour.getAction(this, map);
-                } else{
+                } else if (this.getDisplayChar() == 'B'|| this.getDisplayChar() == 'b'){
                     System.out.println("Brachiosaur at (" + x + "," + y + ") is getting thirsty");
                     behaviour = new ThirstyBehaviour(this);
                     nextAction = behaviour.getAction(this, map);
@@ -181,25 +192,25 @@ public abstract class Dinosaur extends Actor {
             }
 
             // check if dinosaurs are hungry or need to hunt
-//            if (this.foodLevels < 30) {
-//                if (this.getDisplayChar() == 'A') {
-//                    System.out.println("Allosaur at (" + x + "," + y + ") is hunting");
-//                    behaviour = new HuntBehaviour(this);
-//                    nextAction = behaviour.getAction(this, map);
-//                } else if (this.getDisplayChar() == 'p') {
-//                    System.out.println("Pterodactyl at (" + x + "," + y + ") is hunting");
-//                    behaviour = new HuntBehaviour(this);
-//                    nextAction = behaviour.getAction(this, map);
-//                } else if (this.getDisplayChar() == 'S') {
-//                    System.out.println("Stegosaur at (" + x + "," + y + ") is hungry");
-//                    behaviour = new HungerBehaviour(this);
-//                    nextAction = behaviour.getAction(this, map);
-//                } else {
-//                    System.out.println("Brachiosaur at (" + x + "," + y + ") is hungry");
-//                    behaviour = new HungerBehaviour(this);
-//                    nextAction = behaviour.getAction(this, map);
-//                }
-//            }
+            if (this.foodLevels < 30) {
+                if (this.getDisplayChar() == 'A') {
+                    System.out.println("Allosaur at (" + x + "," + y + ") is hunting");
+                    behaviour = new HuntBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                } else if (this.getDisplayChar() == 'P' || this.getDisplayChar() == 'p') {
+                    System.out.println("Pterodactyl at (" + x + "," + y + ") is hungry");
+                    behaviour = new HungerBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                } else if (this.getDisplayChar() == 'S' || this.getDisplayChar() == 's') {
+                    System.out.println("Stegosaur at (" + x + "," + y + ") is hungry");
+                    behaviour = new HungerBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                } else if (this.getDisplayChar() == 'B'|| this.getDisplayChar() == 'b'){
+                    System.out.println("Brachiosaur at (" + x + "," + y + ") is hungry");
+                    behaviour = new HungerBehaviour(this);
+                    nextAction = behaviour.getAction(this, map);
+                }
+            }
 
             //This is to check if breeding is eligible
             if (this.getDisplayChar() == 'B') {
@@ -265,6 +276,9 @@ public abstract class Dinosaur extends Actor {
 //        }
 //    }
 
+
+
+
     /**
      * Egg created by Dinosaurs after breeding
      * @return egg with a baby dinosaur
@@ -274,7 +288,24 @@ public abstract class Dinosaur extends Actor {
         return egg;
     }
 
+    /**
+     * adjacent checks if the dinosaur is next to a food source or not so they can attack/eat
+     * @param dinosaur is the dinosaur
+     * @param player is the player
+     * @param gameMap is the map of the app
+     * @return returns true or false depending if the actors are next to each other
+     */
+    public boolean adjacent(Actor dinosaur, Actor player, GameMap gameMap) {
+        Location currentLocation = gameMap.locationOf(dinosaur);
 
+        for (Exit exit: currentLocation.getExits()) {
+            if (gameMap.getActorAt(exit.getDestination()) == player) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }
 

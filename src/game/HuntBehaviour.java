@@ -28,8 +28,11 @@ public class HuntBehaviour extends FollowBehaviour{
     @Override
     public Action getAction(Actor actor, GameMap map) {
         Location currentLocation = map.locationOf(actor);
-
         target = getLocation(currentLocation, map);
+
+        if (actor.getDisplayChar() == 'P' || actor.getDisplayChar() == 'p') {
+
+        }
 
         if (target != null && adjacent(actor, target, map)) {
             return new AttackAction(target);
@@ -80,7 +83,7 @@ public class HuntBehaviour extends FollowBehaviour{
             for (int y: gameMap.getYRange()) {
                 Location location = gameMap.at(x,y);
                 Actor actor = gameMap.getActorAt(location);
-                if (location.containsAnActor()) {
+                if (location.containsAnActor() ) {
                     dinosaursList.put(actor,location);
                 }
             }
