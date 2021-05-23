@@ -9,8 +9,8 @@ import edu.monash.fit2099.engine.*;
  */
 public abstract class Dinosaur extends Actor {
     public char gender;
-    public int foodLevels = 25;
-    public int waterLevels = 60;
+    public int foodLevels = 80;
+    public int waterLevels = 80;
     public int age = 32;
     private int tick = 0;
     private int hatchTick = 0;
@@ -139,6 +139,7 @@ public abstract class Dinosaur extends Actor {
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
+                        nextAction = new DoNothingAction();
                     }
                 } else if (this.displayChar == 'B') {
                     if (pregnant == 30) {
@@ -148,6 +149,7 @@ public abstract class Dinosaur extends Actor {
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
+                        nextAction = new DoNothingAction();
                     }
                 } else if (this.displayChar == 'P') {
                     if (pregnant == 1) {
@@ -157,6 +159,7 @@ public abstract class Dinosaur extends Actor {
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
+                        nextAction = new DoNothingAction();
                     }
                 } else {
                     if (pregnant == 20) {
@@ -166,6 +169,7 @@ public abstract class Dinosaur extends Actor {
                         nextAction = wanderBehaviour.getAction(this,map);
                     } else {
                         pregnant++;
+                        nextAction = new DoNothingAction();
                     }
                 }
             }

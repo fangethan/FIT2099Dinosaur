@@ -115,9 +115,9 @@ public class Application {
 		Pterodactyls pterodactyl2 = new Pterodactyls("Pterodactyl",'F');
 		Pterodactyls pterodactyl3 = new Pterodactyls("Pterodactyl",'F');
 
-		gameMap.at(30, 12).addActor(pterodactyl1);
+		gameMap.at(32, 12).addActor(pterodactyl1);
 //		gameMap.at(2, 2).addActor(pterodactyl2);
-//		gameMap.at(32, 12).addActor(pterodactyl3);
+		gameMap.at(34, 12).addActor(pterodactyl3);
 
 //		BreedBehaviour breedBehaviour = new BreedBehaviour(pterodactyl1, Breeding.male);
 //		breedBehaviour.getAction(pterodactyl1,gameMap);

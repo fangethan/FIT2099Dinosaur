@@ -33,6 +33,7 @@ public class HungerBehaviour extends FollowBehaviour{
 
         Action nextAction = null;
 
+        // make sure destination isn't null
         if (destination != null) {
             // to check if target is not null and adjacent to the target
             if (sameSpot(actor, destination, map)) {
@@ -82,6 +83,7 @@ public class HungerBehaviour extends FollowBehaviour{
         foodList = getFood(map);
         Location minimalLocation = null;
 
+        // if there is nothing in the food list
         if (foodList.size() > 0) {
             for (Map.Entry<Location, Item> spot: foodList.entrySet()) {
                 // get the location of food and the food name
