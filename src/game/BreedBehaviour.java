@@ -16,6 +16,8 @@ public class BreedBehaviour extends FollowBehaviour{
     private Enum<?> capability;
     private Breeding breeding;
     private WanderBehaviour wanderBehaviour;
+    Location minimalLocationPterodactyl = null;
+
 
     /**
      * This is the Constructor.
@@ -45,33 +47,35 @@ public class BreedBehaviour extends FollowBehaviour{
         target = getLocation(currentLocation, map);
         Location tree = getClosestTree(currentLocation,map);
 
-        // for pterodactyl
-        if (actor.getDisplayChar() == 'P') {
-            if (sameSpecies((Dinosaur) target, (Dinosaur) actor) == true && oppositeGenders((Dinosaur) target, (Dinosaur) actor) == true) {
-                // to check if target is not null and adjacent to the target
-                if (target != null && adjacent(actor, target, map) &&
-                        map.locationOf(target).x() == tree.x() && map.locationOf(target).y() == tree.y()) {
-                    // If both dinosaurs are both ready to mate
-                    nextAction = new BreedAction((Dinosaur) target);
-                    nextAction.execute(actor, map);
-                } else if (map.locationOf(target).x() != tree.x() && map.locationOf(target).y() != tree.y()) {
-                    nextAction = moveTree(target, map, tree);
-                } else {
-                    // the else if checks if it is not near its mate and still fertile so it can move closer towards it
-                    nextAction = super.getAction(actor, map);
+        if (target != null) {
+            // for pterodactyl
+            if (actor.getDisplayChar() == 'P') {
+                if (sameSpecies((Dinosaur) target, (Dinosaur) actor) == true && oppositeGenders((Dinosaur) target, (Dinosaur) actor) == true) {
+                    // to check if target is not null and adjacent to the target
+                    if (adjacent(actor, target, map) &&
+                            map.locationOf(target).x() == tree.x() && map.locationOf(target).y() == tree.y()) {
+                        // If both dinosaurs are both ready to mate
+                        nextAction = new BreedAction((Dinosaur) target);
+                        nextAction.execute(actor, map);
+                    } else if (map.locationOf(target).x() != tree.x() && map.locationOf(target).y() != tree.y()) {
+                        nextAction = moveTree(target, map, tree);
+                    } else {
+                        // the else if checks if it is not near its mate and still fertile so it can move closer towards it
+                        nextAction = super.getAction(actor, map);
+                    }
                 }
-            }
-        } else {
-            // for other dinosaurs
-            if (sameSpecies((Dinosaur) target, (Dinosaur) actor) == true && oppositeGenders((Dinosaur) target, (Dinosaur) actor) == true) {
-                // to check if target is not null and adjacent to the target
-                if (target != null && adjacent(actor, target, map)) {
-                    // If both dinosaurs are both ready to mate
-                    nextAction = new BreedAction((Dinosaur) target);
-                    nextAction.execute(actor,map);
-                } else {
-                    // the else if checks if it is not near its mate and still fertile so it can move closer towards it
-                    nextAction = super.getAction(actor, map);
+            } else {
+                // for other dinosaurs
+                if (sameSpecies((Dinosaur) target, (Dinosaur) actor) == true && oppositeGenders((Dinosaur) target, (Dinosaur) actor) == true) {
+                    // to check if target is not null and adjacent to the target
+                    if (adjacent(actor, target, map)) {
+                        // If both dinosaurs are both ready to mate
+                        nextAction = new BreedAction((Dinosaur) target);
+                        nextAction.execute(actor,map);
+                    } else {
+                        // the else if checks if it is not near its mate and still fertile so it can move closer towards it
+                        nextAction = super.getAction(actor, map);
+                    }
                 }
             }
         }
@@ -206,21 +210,20 @@ public class BreedBehaviour extends FollowBehaviour{
     public Location getClosestTree(Location currentLocation, GameMap map) {
         Map<Location, Ground> treeList = new HashMap<>();
         treeList = getAllTrees(map);
-        Location minimalLocation = null;
 
         for (Map.Entry<Location, Ground> spot: treeList.entrySet()) {
             int x = spot.getKey().x();
             int y = spot.getKey().y();
             Location there = map.at(x,y);
-            if (minimalLocation == null) {
-                minimalLocation = there;
+            if (minimalLocationPterodactyl == null) {
+                minimalLocationPterodactyl = there;
 //                System.out.println("Minimal location is: " + x + "," + y);
-            } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {
-                minimalLocation = there;
+            } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocationPterodactyl)) {
+                minimalLocationPterodactyl = there;
 //                System.out.println("Minimal location is: " + x + "," + y);
             }
         }
-        return minimalLocation;
+        return minimalLocationPterodactyl;
     }
 
 

@@ -40,13 +40,16 @@ public class Eat extends Action {
             } else if (dinosaur.getDisplayChar() == 'P' || dinosaur.getDisplayChar() == 'p') {
                 // if location contains a corpse or fish then check if it is a pterodactyl
                 if (location.getItems().get(i).getDisplayChar() == '%') {
-                    location.removeItem(location.getItems().get(i));
-                    dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 30);
-                    if (dinosaur.getFoodLevel() > 100) {
-                        dinosaur.setFoodLevels(100);
+                    if (i == 2) {
+                        break;
+                    } else {
+                        location.removeItem(location.getItems().get(i));
+                        dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 30);
+                        if (dinosaur.getFoodLevel() > 100) {
+                            dinosaur.setFoodLevels(100);
+                        }
                     }
-                }
-                if(location.getItems().get(i).getDisplayChar() == 'c' ) {
+                } else if(location.getItems().get(i).getDisplayChar() == 'c') {
                     Corpse corpse = (Corpse) location.getItems().get(i);
                     if(corpse.getSpecies() == 'S' || corpse.getSpecies() == 's' ||
                             corpse.getSpecies() == 'A' || corpse.getSpecies() == 'a') {

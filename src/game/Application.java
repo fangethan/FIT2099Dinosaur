@@ -94,8 +94,9 @@ public class Application {
 		}
 
 		Actor player = new Player("Player", '@', 100, new QuittingGame());
-		player.addItemToInventory(new Fruit());
-		world.addPlayer(player, gameMap.at(3, 2));
+		// for feeding
+//		player.addItemToInventory(new Fruit());
+		world.addPlayer(player, gameMap.at(10, 4));
 
 		// Place a pair of stegosaurs in the middle of the map
 		Stegosaur male = new Stegosaur("Stegosaur",'M');
@@ -104,69 +105,40 @@ public class Application {
 		//Places 3 brachisaurs on the map
 		Brachiosaur brachiosaur1 = new Brachiosaur("Brachiosaur",'M');
 		Brachiosaur brachiosaur2 = new Brachiosaur("Brachiosaur",'F');
-		Brachiosaur brachiosaur3 = new Brachiosaur("Brachiosaur",'F');
 
 		//Places 3 allosaurs on the map
 		Allosaur allosaur1 = new Allosaur("Allosaur", 'M');
-		Allosaur allosaur2 = new Allosaur("Allosaur", 'F');
-		Allosaur allosaur3 = new Allosaur("Allosaur", 'F');
-
 
 		Pterodactyls pterodactyl1 = new Pterodactyls("Pterodactyl", 'M');
 		Pterodactyls pterodactyl2 = new Pterodactyls("Pterodactyl",'F');
 		Pterodactyls pterodactyl3 = new Pterodactyls("Pterodactyl",'F');
 
-//		gameMap.at(30, 12).addActor(pterodactyl1);
-//		gameMap.at(2, 2).addActor(pterodactyl2);
-//		gameMap.at(32, 12).addActor(pterodactyl3);
+		gameMap.at(10, 12).addActor(pterodactyl1);
+		gameMap.at(2, 2).addActor(pterodactyl2);
+		gameMap.at(32, 12).addActor(pterodactyl3);
 
-//		BreedBehaviour breedBehaviour = new BreedBehaviour(pterodactyl1, Breeding.male);
-//		breedBehaviour.getAction(pterodactyl1,gameMap);
-//		breedBehaviour.getAllTrees(gameMap);
-//		breedBehaviour.getClosestTree(gameMap.at(32, 12),gameMap);
 
-		gameMap.at(2, 2).addActor(brachiosaur1);
-//		gameMap.at(60, 12).addActor(brachiosaur2);
-//		gameMap.at(32, 12).addActor(brachiosaur3);
+		gameMap.at(24, 18).addActor(brachiosaur1);
+		gameMap.at(24, 16).addActor(brachiosaur2);
 
-//		gameMap.at(10, 20).addActor(male);
-//		gameMap.at(30, 10).addActor(female);
-//		gameMap.at(10, 24).addActor(new Stegosaur("Stegosaur",'F'));
+		gameMap.at(10, 20).addActor(male);
+		gameMap.at(30, 10).addActor(female);
 
-//		gameMap.at(64,10).addActor(allosaur1);
-		Corpse corpse = new Corpse(female.getDisplayChar());
-		gameMap.at(30,10).addItem(corpse);
-		HuntBehaviour huntBehaviour = new HuntBehaviour(allosaur1);
-		huntBehaviour.getAllActors(gameMap);
-//		huntBehaviour.getLocation(gameMap.at(64,10),gameMap);
+		gameMap.at(64,10).addActor(allosaur1);
 
-//		gameMap.at(67,10).addActor(allosaur2);
+		// for testing purposes
+//		Corpse corpse = new Corpse(female.getDisplayChar());
+//		gameMap.at(30,10).addItem(corpse);
 
-//		gameMap.at(10,10).addActor(brachiosaur1);
-//		gameMap.at(13,10).addActor(brachiosaur2);
-
-		Fruit fruit = new Fruit();
-		gameMap.at(30,20).addItem(fruit);
-		gameMap.at(26,20).addItem(fruit);
-		gameMap.at(20,20).addItem(fruit);
-
-//		gameMap.at(0,1).addItem(fruit);
-//		gameMap.at(0,2).addItem(fruit);
-//		gameMap.at(0,3).addItem(fruit);
-
-//		HungerBehaviour hungerBehaviour = new HungerBehaviour(male);
-//		hungerBehaviour.getALLFruits(gameMap);
-//		hungerBehaviour.getLocation(gameMap.at(25,20),gameMap);
-//		hungerBehaviour.getAction(male,gameMap);
 
 		NumberRange widths = gameMap.getXRange();
 		NumberRange height = gameMap.getYRange();
 		gameMap.at(5,7).setGround(new VendingMachine());
 
+		// adding fish to the lake
 		for (int x:widths){
 			for (int y:height) {
 				Location location = gameMap.at(x, y);
-
 				if (location.getGround() instanceof Lake) {
 					for (int i =0; i<5; i++){
 						location.addItem(new Fish());
@@ -176,14 +148,8 @@ public class Application {
 			}
 		}
 
-
-
 		gameMap.at(5,7).setGround(new VendingMachine());
 
-//		BreedBehaviour breedBehaviour = new BreedBehaviour(male, Breeding.male);
-//		breedBehaviour.getAction(male,gameMap);
-		//MenuStartup menu = new MenuStartup(new Display(), world);
-		//menu.initalMenu();
 		world.run();
 	}
 

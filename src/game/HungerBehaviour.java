@@ -10,6 +10,9 @@ import java.util.Map;
  */
 public class HungerBehaviour extends FollowBehaviour{
 
+    Location minimalLocation = null;
+
+
     /**
      * The HungerBehaviour constructor
      * @param subject the actor that is hungry
@@ -116,7 +119,6 @@ public class HungerBehaviour extends FollowBehaviour{
     // less repeated lines in the if else inside the foreach loop
     public Location minimumLocation(int x, int y, GameMap map, Location currentLocation) {
         Location there = map.at(x,y);
-        Location minimalLocation = null;
         if (minimalLocation == null) {
             minimalLocation = there;
         } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocation)) {

@@ -14,8 +14,8 @@ import java.util.Map;
  */
 public abstract class Dinosaur extends Actor {
     public char gender;
-    public int foodLevels = 20;
-    public int waterLevels = 80;
+    public int foodLevels = 80;
+    public int waterLevels = 60;
     public int age = 32;
     private int tick = 0;
     private int rainTick = 0;
@@ -171,7 +171,7 @@ public abstract class Dinosaur extends Actor {
                         nextAction = new DoNothingAction();
                     }
                 } else if (this.displayChar == 'P') {
-                    if (pregnant == 1) {
+                    if (pregnant == 10) {
                         pregnant = 0;
                         removeCapability(Breeding.pregnantFemale);
                         map.locationOf(this).addItem(this.produceEgg(this));
