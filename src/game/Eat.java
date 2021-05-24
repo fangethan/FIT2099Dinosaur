@@ -10,12 +10,19 @@ import java.util.List;
 public class Eat extends Action {
     private Location location;
 
+    /**
+     * this is the eat constructor
+     * @param location which receives the location of where the food is
+     */
     public Eat(Location location){
         this.location = location;
     };
 
     /**
-     * This returns the string after eating
+     * execute the eat action
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return the menuDescription
      */
     @Override
     public String execute(Actor actor, GameMap map) {
@@ -98,6 +105,11 @@ public class Eat extends Action {
         return menuDescription(actor);
     }
 
+    /**
+     * menu description of eat
+     * @param actor The actor performing the action.
+     * @return a string of the actor ate food
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " ate food";

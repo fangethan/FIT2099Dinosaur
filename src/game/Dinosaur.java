@@ -37,18 +37,34 @@ public abstract class Dinosaur extends Actor {
         this.gender = gender;
     }
 
+    /**
+     * getWaterLevels gets the new water levels
+     * @return waterLevel
+     */
     public int getWaterLevels() {
         return waterLevels;
     }
 
+    /**
+     * setWaterLevels sets the new water levels
+     * @param waterLevels is the new water levels
+     */
     public void setWaterLevels(int waterLevels) {
         this.waterLevels = waterLevels;
     }
 
+    /**
+     * getFoodLevels gets the new food levels
+     * @return foodLevels
+     */
     public int getFoodLevels() {
         return foodLevels;
     }
 
+    /**
+     * setFoodLevels set the new food levels
+     * @param foodLevels is the new food levels
+     */
     public void setFoodLevels(int foodLevels) {
         this.foodLevels = foodLevels;
     }
@@ -283,36 +299,6 @@ public abstract class Dinosaur extends Actor {
         return new DoNothingAction();
 
     }
-
-
-    //            Actor player = new Player("Player", '@', 100, new QuittingGame());
-//            map.at(26, 12).addActor(player);
-//            if (adjacent(this,player,map) == true) {
-//                for (Item item : player.getInventory()) {
-//                    if (item instanceof Food) {
-//                        Feed feed = new Feed(this,(Food) item);
-//                        feed.execute(player,map);
-//                    }
-//                }
-//            }
-
-
-//    private void hatching(GameMap map) {
-//        for (int x: map.getXRange()) {
-//            for (int y: map.getYRange()) {
-//                Location location = map.at(x,y);
-//                for (int i = 0; i < location.getItems().size(); i++) {
-//                    if (location.getItems().get(i).getDisplayChar() == 'e') {
-//                        location.removeItem(location.getItems().get(i));
-//                        System.out.println(location.getItems().get(i).getClass().getName());
-////                        location.addActor();
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-
 
 
     /**

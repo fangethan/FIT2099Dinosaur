@@ -8,8 +8,8 @@ public class Pterodactyls extends Dinosaur{
 
     /**
      *
-     * @param name the name of this Stegosaur
-     * @param gender the gender of this Stegosaur
+     * @param name the name of this Pterodactyl
+     * @param gender the gender of this Pterodactyl
      */
     public Pterodactyls(String name, char gender) {
         super(name, 'P', 100, gender);

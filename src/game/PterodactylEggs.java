@@ -2,8 +2,7 @@ package game;
 
 public class PterodactylEggs extends Eggs{
     /**
-     * This is the cosntructor
-     * display char is e
+     * This is the pterodactyl constructor
      *
      */
     public PterodactylEggs() {

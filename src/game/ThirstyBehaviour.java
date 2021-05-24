@@ -18,11 +18,10 @@ public class ThirstyBehaviour extends FollowBehaviour{
     }
     /**
      * getAction gets the actor that is hungry and the gameMap and sees if the
-     * actor current location is adjacent to a food source which could be bush or tree
+     * actor current location is adjacent to a lake
      * @param actor the Actor acting
      * @param map the GameMap containing the Actor
-     * @return the super getAction which is in the FollowBehaviour class which
-     * allows the dinosaur to start moving towards its food source if not near any
+     * @return the nextAction depending on the condition it qualifies
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
@@ -44,6 +43,15 @@ public class ThirstyBehaviour extends FollowBehaviour{
         return nextAction;
     }
 
+    /**
+     * nextMoveAction is like the super getAction in follow behaviour
+     * but this method is a replacement which allows for actors to follow to a location aka a lake
+     * so they can drink
+     * @param actor is the dinosaur
+     * @param map is the map of the app
+     * @param there is the lake location
+     * @return
+     */
     public Action nextMoveAction(Actor actor, GameMap map, Location there) {
         Location here = map.locationOf(actor);
 
@@ -62,11 +70,10 @@ public class ThirstyBehaviour extends FollowBehaviour{
 
 
     /**
-     * getLocation is used to find the closest food source for the herbivores to eat
-     * out of all the bushes/trees around the map
+     * getLocation is used to find the closest lake for the dinosaurs to drink
      * @param currentLocation is the current location of the dinosaur
      * @param map is the gameMap of the app
-     * @return returns the minimum location of the food source
+     * @return returns the minimum location of the lake
      */
     public Location getLocation(Location currentLocation, GameMap map) {
         Map<Location, Ground> water = new HashMap<>();
@@ -91,7 +98,7 @@ public class ThirstyBehaviour extends FollowBehaviour{
     /**
      * getAllLakes gets all the lakes on the gameMap
      * @param gameMap is the entire gameMap of the app
-     * @return returns all the fruits found on the gameMap in a list
+     * @return returns all the lakes found on the gameMap in a list
      */
     public Map<Location, Ground> getAllLakes(GameMap gameMap) {
         Map<Location, Ground> water = new HashMap<>();
@@ -108,9 +115,9 @@ public class ThirstyBehaviour extends FollowBehaviour{
     }
 
     /**
-     * adjacent checks if the dinosaur is next to a food source or not so they can eat the fruit
+     * adjacent checks if the dinosaur is next to a lake or not so they can drink
      * @param mate1 is the dinosaur
-     * @param lake is the food source
+     * @param lake is the water source
      * @param gameMap is the map of the app
      * @return returns true or false depending if the actors are next to each other
      */

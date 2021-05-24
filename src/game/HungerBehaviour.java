@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class HungerBehaviour extends FollowBehaviour{
 
-    Location minimalLocation = null;
+    private Location minimalLocation = null;
 
 
     /**
@@ -52,9 +52,15 @@ public class HungerBehaviour extends FollowBehaviour{
         return nextAction;
     }
 
-    // so instead of calling the super getAction in follow behaviour
-    // this method is a replacement which allows for actors to follow to a location aka an item
-    // so they can eat it
+    /**
+     * nextMoveAction is like the super getAction in follow behaviour
+     * but this method is a replacement which allows for actors to follow to a location aka an item
+     * so they can eat it
+     * @param actor is the dinosaur
+     * @param map is the map of the app
+     * @param there is the food location
+     * @return
+     */
     public Action nextMoveAction(Actor actor, GameMap map, Location there) {
         Location here = map.locationOf(actor);
 
@@ -114,9 +120,16 @@ public class HungerBehaviour extends FollowBehaviour{
         return minimalLocation;
     }
 
-    // this method finds the minimum location
-    // implemented to save effiency in the getLocation so there will be
-    // less repeated lines in the if else inside the foreach loop
+    /**
+     * finds the minimum location implemented to save effiency in the
+     * getLocation so there will be less repeated
+     * lines in the if else inside the for each loop
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param map is the map on the app
+     * @param currentLocation is the actor current location
+     * @return the minimalLocation of the closest food
+     */
     public Location minimumLocation(int x, int y, GameMap map, Location currentLocation) {
         Location there = map.at(x,y);
         if (minimalLocation == null) {

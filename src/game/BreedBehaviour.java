@@ -16,7 +16,7 @@ public class BreedBehaviour extends FollowBehaviour{
     private Enum<?> capability;
     private Breeding breeding;
     private WanderBehaviour wanderBehaviour;
-    Location minimalLocationPterodactyl = null;
+    private Location minimalLocationPterodactyl = null;
 
 
     /**
@@ -217,10 +217,8 @@ public class BreedBehaviour extends FollowBehaviour{
             Location there = map.at(x,y);
             if (minimalLocationPterodactyl == null) {
                 minimalLocationPterodactyl = there;
-//                System.out.println("Minimal location is: " + x + "," + y);
             } else if (super.distance(currentLocation, there) < super.distance(currentLocation, minimalLocationPterodactyl)) {
                 minimalLocationPterodactyl = there;
-//                System.out.println("Minimal location is: " + x + "," + y);
             }
         }
         return minimalLocationPterodactyl;

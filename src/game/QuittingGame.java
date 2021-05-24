@@ -12,7 +12,7 @@ public class QuittingGame extends Action{
 public static boolean boolenEnd = false;
 
     /**
-     * This executees the quitting action
+     * This executes the quitting action
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
      * @return string
@@ -36,7 +36,7 @@ public static boolean boolenEnd = false;
 
     /**
      * This returns the hotkey
-     * @return
+     * @return e
      */
     @Override
     public String hotkey(){

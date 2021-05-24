@@ -15,7 +15,7 @@ public class MenuStartup {
     Scanner scanner = new Scanner(System.in);
 
     /**
-     * THis is the constructor
+     * This is the menu startup constructor
      * @param display is the display used to create the world
      */
     public MenuStartup(Display display){

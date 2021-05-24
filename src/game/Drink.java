@@ -13,7 +13,10 @@ public class Drink extends Action {
     };
 
     /**
-     * This returns the string after eating
+     * the execute method on execute the drink action
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return the menuDescription
      */
     @Override
     public String execute(Actor actor, GameMap map) {
@@ -33,6 +36,11 @@ public class Drink extends Action {
         return menuDescription(actor);
     }
 
+    /**
+     * menu description of drink
+     * @param actor The actor performing the action.
+     * @return a string of the actor drank water
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + "drank water";

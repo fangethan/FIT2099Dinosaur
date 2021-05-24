@@ -7,6 +7,7 @@ public class Corpse  extends Food {
     char species;
     /**
      * This is the constructor
+     * @param species which receives the species of dinosaur
      *
      */
     public Corpse(char species) {
@@ -14,6 +15,10 @@ public class Corpse  extends Food {
         this.species = species;
     }
 
+    /**
+     * getSpecies which gets the species of dinosaur
+     *
+     */
     public char getSpecies() {
         return species;
     }

@@ -9,15 +9,24 @@ public class Feed extends Action {
     private Dinosaur dinosaur;
     private Food food;
 
+    /**
+     * the feed constructor
+     * @param dinosaur is the dinosaur that is getting fed
+     * @param food is the food that will be given to the dinosaur
+     */
     public Feed(Dinosaur dinosaur, Food food) {
         this.dinosaur = dinosaur;
         this.food = food;
     }
 
+    /**
+     * the execute method that executes the feed action
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return the menuDescription
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
-
-
         if (dinosaur.getDisplayChar() == 'S' || dinosaur.getDisplayChar() == 's') {
             actor.removeItemFromInventory(food);
             dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 20);
@@ -31,6 +40,11 @@ public class Feed extends Action {
         return menuDescription(actor);
     }
 
+    /**
+     * menu description of feed
+     * @param actor The actor performing the action.
+     * @return a string of the actor fed dinosaur
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " fed dinosaur";

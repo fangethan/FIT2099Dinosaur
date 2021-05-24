@@ -19,7 +19,7 @@ public class Lake extends Ground {
     ArrayList<Fish> fishList = new ArrayList<Fish>();
 
     /**
-     * Constructor.
+     * The lake constructor
      */
     public Lake() {
         super('~');

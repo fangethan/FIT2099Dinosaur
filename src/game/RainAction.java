@@ -11,7 +11,7 @@ import java.util.Random;
 
 /**
  * This is the rainAction class which intiates rain
- * It also makes the dinasours conscious if it rains
+ * It also makes the dinosaurs conscious if it rains
  */
 public class RainAction {
     private final GameMap map;

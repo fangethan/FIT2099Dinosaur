@@ -10,20 +10,24 @@ public class Eggs extends Food{
     private int hatch = 0;
 
     /**
-     * This is the cosntructor
-     * display char is e
+     * the egg constructor
+     * @param dinosaur is the dinosaur that laid the egg
      */
     public Eggs(Dinosaur dinosaur) {
         super("Egg", 'e', true);
         this.dinosaur = dinosaur;
     }
 
+    /**
+     * the tick to check when to hatch
+     * @param currentLocation The location of the ground on which we lie.
+     */
     @Override
     public void tick(Location currentLocation) {
         hatch++;
         if (hatch == 3) {
             currentLocation.removeItem(this);
-            currentLocation.addActor(new Pterodactyls("Pterodactyls", 'M'));
+            currentLocation.addActor(new Pterodactyls("Pterodactyl", 'M'));
         }
     }
 
