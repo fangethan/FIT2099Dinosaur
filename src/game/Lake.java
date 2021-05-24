@@ -8,27 +8,35 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This class is for the water in the same
+ */
 public class Lake extends Ground {
-
 
     int capacity;
     int turnNumber;
+    // Creates an array with the fish in each section
     ArrayList<Fish> fishList = new ArrayList<Fish>();
 
     /**
      * Constructor.
-
      */
     public Lake() {
         super('~');
         this.capacity = 25;
-
+        // Adds 5 fishes at the start of the game
         for (int i = 0; i< 5; i++){
             fishList.add(new Fish());
         }
 
 
     }
+
+    /**
+     * This is a tick function which adds fishs finsihes each turn with a probabity of 60%
+     * THis aso checks every 10 turns if it rains with a probabiity of 20%
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         super.tick(location);
@@ -53,7 +61,7 @@ public class Lake extends Ground {
 
                 float result = r.nextInt(6-1) + 1;
                 float finalResult = result / 10;
-                //double numberBetween = (Math.random() * ((6 - 1) + 1)) + 1;
+
                 this.capacity += finalResult*20;
                 //System.out.println(this.capacity );
                 turnNumber = 0;
@@ -63,6 +71,12 @@ public class Lake extends Ground {
         }
 
     }
+
+    /**
+     * THis makes it so only baby pretoroactyls and adult pterodactyles can enter
+     * @param actor the Actor to check
+     * @return true or false
+     */
     @Override
     public boolean canActorEnter(Actor actor) {
 

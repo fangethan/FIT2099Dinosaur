@@ -27,7 +27,7 @@ public class MenuStartup {
                     int inputEcoPoints = Integer.parseInt(scanner.nextLine());
                     return new Challenge(display,inputMoves,inputEcoPoints);
                 case 2:
-                    return new World(display);
+                    return new Sandbox(display);
 
 
             }
