@@ -18,6 +18,7 @@ public abstract class Dinosaur extends Actor {
     public int waterLevels = 80;
     public int age = 32;
     private int tick = 0;
+    private int rainTick = 0;
     private int hatchTick = 0;
     private int pregnant = 0;
     private Behaviour behaviour;
@@ -104,13 +105,18 @@ public abstract class Dinosaur extends Actor {
         int x = location.x();
         int y = location.y();
 
+
         // Rain and making sure uncoius becomes consicous again
+
+        rainTick++;
         Probability value = new Probability();
         float randomNumber = value.getProbability();
-        if (randomNumber< 0.2){
-            RainAction rain = new RainAction(map);
-            rain.rain();
-        }
+            if (randomNumber < 0.2 && rainTick == 2) {
+
+                RainAction rain = new RainAction(map);
+                rain.rain();
+                rainTick = 0;
+            }
 
 
 

@@ -49,6 +49,7 @@ public class Lake extends Ground {
         if (randomNumber<0.6){
             if (fishList.size() <=25) {
                 fishList.add(new Fish());
+                location.addItem(new Fish());
                 //System.out.println(fishList.size());
             }
         }

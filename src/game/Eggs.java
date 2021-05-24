@@ -18,14 +18,14 @@ public class Eggs extends Food{
         this.dinosaur = dinosaur;
     }
 
-//    @Override
-//    public void tick(Location currentLocation) {
-//        hatch++;
-//        if (hatch == 1) {
-//            currentLocation.removeItem(this);
-//            currentLocation.addActor(new Stegosaur("Steosaur", 'M'));
-//        }
-//    }
+    @Override
+    public void tick(Location currentLocation) {
+        hatch++;
+        if (hatch == 3) {
+            currentLocation.removeItem(this);
+            currentLocation.addActor(new Pterodactyls("Pterodactyls", 'M'));
+        }
+    }
 
 
     /**

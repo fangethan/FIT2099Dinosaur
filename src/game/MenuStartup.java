@@ -6,13 +6,27 @@ import edu.monash.fit2099.engine.World;
 
 import java.util.Scanner;
 
+/**
+ * This class starts up the program asking if challenge or sandbox
+ */
 public class MenuStartup {
 
     private final Display display;
     Scanner scanner = new Scanner(System.in);
+
+    /**
+     * THis is the constructor
+     * @param display is the display used to create the world
+     */
     public MenuStartup(Display display){
         this.display = display;
     }
+
+    /**
+     * This asks if the user wants a challenge or sandbox mode
+     * Once they choose it returns a new challenge world or sandbox mode
+     * @return challenge or sandbox world
+     */
     public World initalMenu(){
 
         int selection;
@@ -36,6 +50,10 @@ public class MenuStartup {
         return null;
     }
 
+    /**
+     * This asks which game mode to play
+     * @return  choice of the selection
+     */
     public int selectMenuItem(){
         //This asks for user input to create a buyer or next car
         System.out.println("Choose a game mode");

@@ -159,6 +159,23 @@ public class Application {
 //		hungerBehaviour.getLocation(gameMap.at(25,20),gameMap);
 //		hungerBehaviour.getAction(male,gameMap);
 
+		NumberRange widths = gameMap.getXRange();
+		NumberRange height = gameMap.getYRange();
+		gameMap.at(5,7).setGround(new VendingMachine());
+
+		for (int x:widths){
+			for (int y:height) {
+				Location location = gameMap.at(x, y);
+
+				if (location.getGround() instanceof Lake) {
+					for (int i =0; i<5; i++){
+						location.addItem(new Fish());
+					}
+
+				}
+			}
+		}
+
 
 
 		gameMap.at(5,7).setGround(new VendingMachine());
