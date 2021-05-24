@@ -2,6 +2,11 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * This is the dinosaur abstract class
  * This extends the actor
@@ -9,7 +14,7 @@ import edu.monash.fit2099.engine.*;
  */
 public abstract class Dinosaur extends Actor {
     public char gender;
-    public int foodLevels = 80;
+    public int foodLevels = 20;
     public int waterLevels = 80;
     public int age = 32;
     private int tick = 0;
@@ -118,16 +123,24 @@ public abstract class Dinosaur extends Actor {
 
 //            hatching(map);
 
-//            Actor player = new Player("Player", '@', 100, new QuittingGame());
-//            map.at(26, 12).addActor(player);
-//            if (adjacent(this,player,map) == true) {
-//                for (Item item : player.getInventory()) {
-//                    if (item instanceof Food) {
-//                        Feed feed = new Feed(this,(Food) item);
-//                        feed.execute(player,map);
-//                    }
-//                }
-//            }
+            Map<Actor, Location> playerList = new HashMap<>();
+            playerList = getAllPlayers(map);
+
+            for (Map.Entry<Actor, Location> spot: playerList.entrySet()) {
+                Actor playerLocation = spot.getValue().getActor();
+                List<Item> playerItems = spot.getKey().getInventory();
+                if (adjacent(this,playerLocation,map) == true) {
+                    for (int i = 0; i < playerItems.size(); i++) {
+                        if (playerItems.get(i) instanceof Food) {
+                            Feed feed = new Feed(this,(Food) playerItems.get(i));
+                            feed.execute(playerLocation,map);
+                        }
+                    }
+                }
+            }
+
+
+
 
             // if dinosaur is pregnant and may be ready to produce egg
             if (hasCapability(Breeding.pregnantFemale)) {
@@ -265,6 +278,19 @@ public abstract class Dinosaur extends Actor {
 
     }
 
+
+    //            Actor player = new Player("Player", '@', 100, new QuittingGame());
+//            map.at(26, 12).addActor(player);
+//            if (adjacent(this,player,map) == true) {
+//                for (Item item : player.getInventory()) {
+//                    if (item instanceof Food) {
+//                        Feed feed = new Feed(this,(Food) item);
+//                        feed.execute(player,map);
+//                    }
+//                }
+//            }
+
+
 //    private void hatching(GameMap map) {
 //        for (int x: map.getXRange()) {
 //            for (int y: map.getYRange()) {
@@ -311,7 +337,28 @@ public abstract class Dinosaur extends Actor {
         return false;
     }
 
-}
+    /**
+     * This gets all the players on the map
+     * @param gameMap is the map
+     * @return list of all the players
+     */
+    public Map<Actor, Location> getAllPlayers(GameMap gameMap) {
+
+        Map<Actor, Location> playerList = new HashMap<>();
+        for (int x: gameMap.getXRange()) {
+            for (int y: gameMap.getYRange()) {
+                Location location = gameMap.at(x,y);
+                Actor actor = gameMap.getActorAt(location);
+                if (actor instanceof Player) {
+                    playerList.put(actor,location);
+                }
+            }
+        }
+        return playerList;
+    }
+ }
+
+
 
 
 

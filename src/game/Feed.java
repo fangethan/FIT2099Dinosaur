@@ -28,7 +28,6 @@ public class Feed extends Action {
             actor.removeItemFromInventory(food);
             dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 20);
         }
-
         return menuDescription(actor);
     }
 

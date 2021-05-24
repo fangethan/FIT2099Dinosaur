@@ -22,7 +22,7 @@ public class Death  extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         Location location = map.locationOf(actor);
-        Item corpse = new Corpse();
+        Item corpse = new Corpse(actor.getDisplayChar());
 
         map.locationOf(actor).addItem(corpse);
 
