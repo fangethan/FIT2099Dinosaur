@@ -1,8 +1,7 @@
 package game.Items;
 
 import edu.monash.fit2099.engine.Location;
-import game.Dinosaur.Dinosaur;
-import game.Dinosaur.Pterodactyls;
+import game.Dinosaur.*;
 import game.Player.EcoPoints;
 
 /**
@@ -29,9 +28,23 @@ public class Eggs extends Food{
     public void tick(Location currentLocation) {
         hatch++;
         if (hatch == 3) {
-            currentLocation.removeItem(this);
-            currentLocation.addActor(new Pterodactyls("Pterodactyl", 'M'));
-            EcoPoints.addPoints(100);
+            if(dinosaur.getDisplayChar() == 'B') {
+                currentLocation.removeItem(this);
+                currentLocation.addActor(new Brachiosaur("Brachiosaur", 'M'));
+                EcoPoints.addPoints(100);
+            } else if (dinosaur.getDisplayChar() == 'P') {
+                currentLocation.removeItem(this);
+                currentLocation.addActor(new Pterodactyls("Pterodactyl", 'M'));
+                EcoPoints.addPoints(100);
+            } else if (dinosaur.getDisplayChar() == 'S') {
+                currentLocation.removeItem(this);
+                currentLocation.addActor(new Stegosaur("Stegosaur", 'M'));
+                EcoPoints.addPoints(100);
+            } else if (dinosaur.getDisplayChar() == 'A') {
+                currentLocation.removeItem(this);
+                currentLocation.addActor(new Allosaur("Allosaur", 'M'));
+                EcoPoints.addPoints(100);
+            }
         }
     }
 

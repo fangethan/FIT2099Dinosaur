@@ -1,24 +1,36 @@
 Design Changes
 
 Dinosaur
-- new attribute thirsty behaviuor
+- new attribute thirsty behaviuor and the rain action for when rain occurs
 
 Breed Behaviour
-- 
+- so the breed behaviour now allows the pterodactyl to breed with another dinosaur. New methods implemented were getAllTrees, getClosetTree and move tree
+  to allow one of the pterodactyls to move towards the tree in order for breeding to begin. In the getAction, it checks the species
+  to see if it is a pterodactyl or not before executing the new methods stated above
 
 Hunger Behaviour
+- so the hunger behaviour now allows the all dinosaurs to become hungry as in Assignment 2 it was not accomplished.
+  Methods implemented were getAction, getLocation, getFood, minimumLocation, nextMoveAction, sameSpot. The method allows dinosaurs
+  to move towards the closet food source and can eat the food source depending on the dinosaur species
 
 Eat Action
+- so the eat action allows all dinosaurs to eat as in Assignment 2 it was not accomplished.
+  Methods implemented were the constructor, execute and menuDescription. The class objective will allow
+  dinosaurs to eat an item of food depending on their species and improve their food levels
 
 Feed action
+- so the feed action allows all dinosaurs to be fed as in Assignment 2 it was not accomplished.
+  Methods implemented were the constructor, execute and menuDescription. The class objective will allow
+  dinosaurs to eat an item of food depending on their species and improve their food levels
 
+Drink action
+- so the drink action allows all dinosaurs to drink.
+  Methods implemented were the constructor, execute and menuDescription. The class objective will allow
+  dinosaurs to drink from a lake and improve its water levels depending on species
 
 Vending Machine
 - The new pterodactyl eggs were added to it
 
-
-
-New classes
 
 Fish
 - Fish is a new class that extends food.
@@ -29,10 +41,14 @@ Lake
   starts off with 5 fish in it. 
 
 Pterodactyls
+- a new dinosaur that extends towards the dinosaur class
 
 Pterodactyls Egg
+- a food that extends the egg class
 
 Thirsty behaviour
+- - so the thirsty behaviour now allows the dinosaurs to become thirsty and move towards the closest lake whenever water levels are down
+    Methods implemented were getAction, getLocation, getAllLakes, nextMoveAction, adjacent.
 
 
 MenuStartup
