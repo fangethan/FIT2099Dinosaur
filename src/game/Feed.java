@@ -30,12 +30,15 @@ public class Feed extends Action {
         if (dinosaur.getDisplayChar() == 'S' || dinosaur.getDisplayChar() == 's') {
             actor.removeItemFromInventory(food);
             dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 20);
+            EcoPoints.addPoints(10);
         } else if (dinosaur.getDisplayChar() == 'B' || dinosaur.getDisplayChar() == 'b') {
             actor.removeItemFromInventory(food);
             dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 20);
+            EcoPoints.addPoints(10);
         } else if (dinosaur.getDisplayChar() == 'P' || dinosaur.getDisplayChar() == 'p') {
             actor.removeItemFromInventory(food);
             dinosaur.setFoodLevels(dinosaur.getFoodLevel() + 20);
+            EcoPoints.addPoints(10);
         }
         return menuDescription(actor);
     }

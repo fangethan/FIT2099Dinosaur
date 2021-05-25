@@ -96,7 +96,7 @@ public class Application {
 		Actor player = new Player("Player", '@', 100, new QuittingGame());
 		// for feeding
 //		player.addItemToInventory(new Fruit());
-		world.addPlayer(player, gameMap.at(20, 4));
+		world.addPlayer(player, gameMap.at(9, 4));
 
 		// Place a pair of stegosaurs in the middle of the map
 		Stegosaur male = new Stegosaur("Stegosaur",'M');

@@ -28,6 +28,7 @@ public class Eggs extends Food{
         if (hatch == 3) {
             currentLocation.removeItem(this);
             currentLocation.addActor(new Pterodactyls("Pterodactyl", 'M'));
+            EcoPoints.addPoints(100);
         }
     }
 
