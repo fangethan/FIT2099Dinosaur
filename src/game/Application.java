@@ -118,8 +118,8 @@ public class Application {
 		//Places 3 brachisaurs on the map
 		Brachiosaur brachiosaur1 = new Brachiosaur("Brachiosaur", 'M');
 		Brachiosaur brachiosaur2 = new Brachiosaur("Brachiosaur", 'F');
-
-		//Places 3 allosaurs on the map
+//
+//		//Places 3 allosaurs on the map
 		Allosaur allosaur1 = new Allosaur("Allosaur", 'M');
 
 		Pterodactyls pterodactyl1 = new Pterodactyls("Pterodactyl", 'M');

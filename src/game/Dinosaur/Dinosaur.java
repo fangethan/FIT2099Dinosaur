@@ -141,16 +141,12 @@ public abstract class Dinosaur extends Actor {
                 rainTick = 0;
             }
 
-
-
         Action nextAction = null;
 
         if (isConscious()) {
             //Reduces food level each turn
             foodLevels--;
             waterLevels--;
-
-//            hatching(map);
 
             Map<Actor, Location> playerList = new HashMap<>();
             playerList = getAllPlayers(map);
@@ -167,8 +163,6 @@ public abstract class Dinosaur extends Actor {
                     }
                 }
             }
-
-
 
 
             // if dinosaur is pregnant and may be ready to produce egg
@@ -215,6 +209,7 @@ public abstract class Dinosaur extends Actor {
                     }
                 }
             }
+
 
             // check if dinosaurs are thirsty
             if (this.waterLevels < 40) {

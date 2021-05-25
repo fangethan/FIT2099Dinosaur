@@ -29,21 +29,29 @@ public class Eggs extends Food{
         hatch++;
         if (hatch == 3) {
             if(dinosaur.getDisplayChar() == 'B') {
-                currentLocation.removeItem(this);
-                currentLocation.addActor(new Brachiosaur("Brachiosaur", 'M'));
-                EcoPoints.addPoints(100);
+                if (currentLocation.canActorEnter(dinosaur)) {
+                    currentLocation.removeItem(this);
+                    currentLocation.addActor(new Brachiosaur("Brachiosaur", 'M'));
+                    EcoPoints.addPoints(100);
+                }
             } else if (dinosaur.getDisplayChar() == 'P') {
-                currentLocation.removeItem(this);
-                currentLocation.addActor(new Pterodactyls("Pterodactyl", 'M'));
-                EcoPoints.addPoints(100);
+                if (currentLocation.canActorEnter(dinosaur)) {
+                    currentLocation.removeItem(this);
+                    currentLocation.addActor(new Pterodactyls("Pterodactyl", 'M'));
+                    EcoPoints.addPoints(100);
+                }
             } else if (dinosaur.getDisplayChar() == 'S') {
-                currentLocation.removeItem(this);
-                currentLocation.addActor(new Stegosaur("Stegosaur", 'M'));
-                EcoPoints.addPoints(100);
+                if (currentLocation.canActorEnter(dinosaur)) {
+                    currentLocation.removeItem(this);
+                    currentLocation.addActor(new Stegosaur("Stegosaur", 'M'));
+                    EcoPoints.addPoints(100);
+                }
             } else if (dinosaur.getDisplayChar() == 'A') {
-                currentLocation.removeItem(this);
-                currentLocation.addActor(new Allosaur("Allosaur", 'M'));
-                EcoPoints.addPoints(100);
+                if (currentLocation.canActorEnter(dinosaur)) {
+                    currentLocation.removeItem(this);
+                    currentLocation.addActor(new Allosaur("Allosaur", 'M'));
+                    EcoPoints.addPoints(100);
+                }
             }
         }
     }

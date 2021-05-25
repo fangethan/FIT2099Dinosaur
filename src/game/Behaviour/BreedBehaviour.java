@@ -63,7 +63,7 @@ public class BreedBehaviour extends FollowBehaviour {
                         nextAction = moveTree(target, map, tree);
                     } else {
                         // the else if checks if it is not near its mate and still fertile so it can move closer towards it
-                        nextAction = super.getAction(actor, map);
+                        nextAction = movePteradoctylOnTree(actor,map, target);
                     }
                 }
             } else {
@@ -82,6 +82,24 @@ public class BreedBehaviour extends FollowBehaviour {
             }
         }
             return nextAction;
+    }
+
+    public Action movePteradoctylOnTree(Actor actor, GameMap map, Actor target) {
+        Location here = map.locationOf(actor);
+        Location there = map.locationOf(target);
+
+        int currentDistance = distance(here, there);
+        for (Exit exit : here.getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.canActorEnter(actor)) {
+                int newDistance = distance(destination, there);
+                if (newDistance < currentDistance) {
+                    return new MoveActorAction(destination, exit.getName());
+                }
+            }
+        }
+
+        return null;
     }
 
 

@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class ThirstyBehaviour extends FollowBehaviour {
 
-
     /**
      * Constructor
      *
