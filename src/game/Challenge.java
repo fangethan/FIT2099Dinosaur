@@ -11,7 +11,7 @@ public class Challenge extends World {
 
     private final int turn;
     private final int points;
-    int turnsCurrently=0;
+    private int turnsCurrently=0;
 
     /**
      * Constructor.

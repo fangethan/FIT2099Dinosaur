@@ -13,7 +13,7 @@ public class VendingMachine extends Ground {
     /**
      * itemMap of whats in the vending machine
      */
-    HashMap<Item, Integer> ItemMap = new HashMap<Item, Integer>();
+    public HashMap<Item, Integer> ItemMap = new HashMap<Item, Integer>();
 
     /**
      * constructor of vending machine

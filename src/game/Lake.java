@@ -13,8 +13,8 @@ import java.util.Random;
  */
 public class Lake extends Ground {
 
-    int capacity;
-    int turnNumber;
+    private int capacity;
+    private int turnNumber;
     // Creates an array with the fish in each section
     ArrayList<Fish> fishList = new ArrayList<Fish>();
 
