@@ -1,0 +1,50 @@
+Design Changes
+
+Dinosaur
+- new attribute thirsty behaviuor
+
+Breed Behaviour
+- 
+
+Hunger Behaviour
+
+Eat Action
+
+Feed action
+
+
+Vending Machine
+- The new pterodactyl eggs were added to it
+
+
+
+New classes
+
+Fish
+- Fish is a new class that extends food.
+
+Lake
+- Lake is a new ground type. The method canActorEnter was overrided to ensure that only 
+  pterodactyls enter the ground. They do this to obtain fish. The lake also 
+  starts off with 5 fish in it. 
+
+Pterodactyls
+
+Pterodactyls Egg
+
+Thirsty behaviour
+
+
+MenuStartup
+- The menu startup is a class which intiates the startup menu asking if the 
+  player wants to choose a challenge mode or sandbox or exit. Depending on the answer
+  it will pace the new challenge world or sandbox mode back inot the application. 
+
+World extenstions
+- The 2 new worlds are challenge and sandbox. These are both extensions of the world class. 
+  Both these classes keep track of if the player clicks the end button through the QuittingAction
+  class. The challenge mode also keeps track of the turns and eco points and it overides still
+  running.
+
+
+
