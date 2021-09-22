@@ -21,8 +21,8 @@ import java.util.Map;
  */
 public abstract class Dinosaur extends Actor {
     public char gender;
-    public int foodLevels = 80;
-    public int waterLevels = 60;
+    public int foodLevels = 30;
+    public int waterLevels = 30;
     public int age = 32;
     private int tick = 0;
     private int rainTick = 0;
